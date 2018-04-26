@@ -24,7 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".video.view.Video_show_video"></activity>
+        <activity android:name=".video.view.Video_show_video"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            ></activity>
         <activity android:name=".user.LoginActivity" />
         <activity android:name=".user.RegActivity" />
         <activity android:name=".user.DisanfangActivity" />
