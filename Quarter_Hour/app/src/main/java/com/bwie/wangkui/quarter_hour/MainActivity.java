@@ -22,21 +22,14 @@ import android.widget.Toast;
 import com.bwie.wangkui.quarter_hour.jokes.Fragment2;
 import com.bwie.wangkui.quarter_hour.recommend.Fragment1;
 import com.bwie.wangkui.quarter_hour.user.DisanfangActivity;
-import com.bwie.wangkui.quarter_hour.utils.API;
-import com.bwie.wangkui.quarter_hour.utils.ApiService;
-import com.bwie.wangkui.quarter_hour.utils.Bean;
-import com.bwie.wangkui.quarter_hour.utils.RetrofitUtlis;
+
 import com.bwie.wangkui.quarter_hour.video.Fragment3;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.hjm.bottomtabbar.BottomTabBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.Observable;
-import rx.Scheduler;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -183,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
+
 
 }
