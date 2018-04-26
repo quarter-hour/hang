@@ -27,7 +27,6 @@ public class ShowVideo_Model {
         hashMap.put("token","android");
         hashMap.put("page",page);
         Flowable<ShowVideo_Bean> showVideo_beanFlowable = apiService.show_video(hashMap);
-
         showVideo_beanFlowable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DefaultSubscriber<ShowVideo_Bean>() {

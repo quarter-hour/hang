@@ -21,21 +21,16 @@ import rx.Observable;
  */
 
 public interface ApiService {
-<<<<<<< HEAD
 
         @GET("quarter/getHotVideos")
         Flowable<ShowVideo_Bean> show_video(@QueryMap HashMap<String,String> map);
-=======
-    //广告接口
->>>>>>> 9f42f2314ab1b5de01d6d7158a8b403eff5f2e55
-    @GET("quarter/getAd")
-    Observable<Bean> get();
+        //广告接口
+        @GET("quarter/getAd")
+        Observable<Bean> get();
+        //发表段子
+        @GET("quarter/publishJoke")
+        Flowable<String> push(@QueryMap HashMap<String,String> map);
 
 
-    /**
-     * 段子页面 方法
-     */
-   //获取段子列表
-//    @GET("quarter/getJokes ")
-//    Observable<> getlokelist(@Query("page") String page);
+
 }

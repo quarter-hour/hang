@@ -53,6 +53,7 @@ public class RetrofitUtlis {
             synchronized (RetrofitUtlis.class) {
                 if (retrofitUtil == null) {
                     retrofitUtil = new RetrofitUtlis();
+
                 }
             }
         }

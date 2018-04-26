@@ -28,11 +28,9 @@ public class MyApplication extends Application{
 
         Fresco.initialize(this);
 
-
     }
 
     public static MyApplication getMyApplication(){
-
         return myApplication;
     }
 }
