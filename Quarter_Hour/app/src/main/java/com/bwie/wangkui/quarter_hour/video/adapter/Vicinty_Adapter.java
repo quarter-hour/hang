@@ -32,7 +32,14 @@ public class Vicinty_Adapter extends RecyclerView.Adapter<Vicinty_Adapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.vicinty_recycleview_item,parent,false);
-        MyViewHolder myViewHolder = new MyViewHolder(view);
+        final MyViewHolder myViewHolder = new MyViewHolder(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int layoutPosition = myViewHolder.getLayoutPosition();
+                recyclerclick.serOnRecyclerclickListenner(layoutPosition);
+            }
+        });
         return myViewHolder;
     }
 
@@ -58,5 +65,13 @@ public class Vicinty_Adapter extends RecyclerView.Adapter<Vicinty_Adapter.MyView
             super(itemView);
             imageView = itemView.findViewById(R.id.vicinty_image);
         }
+    }
+    public interface onRecyclerclick{
+        void serOnRecyclerclickListenner(int position);
+    }
+    onRecyclerclick recyclerclick;
+
+    public void onItemclickListenner(onRecyclerclick onRecyclerclick){
+        recyclerclick = onRecyclerclick;
     }
 }

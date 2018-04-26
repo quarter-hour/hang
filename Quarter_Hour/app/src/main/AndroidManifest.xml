@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -33,6 +33,7 @@
         <activity android:name=".user.DisanfangActivity" />
         <activity android:name=".user.ForgetpwdActivity" />
         <activity android:name=".user.ConfirmActivity"></activity>
+
     </application>
 
 </manifest>

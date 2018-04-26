@@ -55,11 +55,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
 //        String icon = list.get(position).getUser().getIcon();
         String cover = list.get(position).getCover();
+
         int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
     //Item的宽度，或图片的宽度
         int width = screenWidth/2;
 
-        if (cover!=null){
+        if (cover!=null&&!cover.equals("")){
             Glide.with(context).load(cover).override(width,Target.SIZE_ORIGINAL).into(holder.imageView);
         }
     }
