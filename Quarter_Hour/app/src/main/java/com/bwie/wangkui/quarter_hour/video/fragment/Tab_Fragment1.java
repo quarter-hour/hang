@@ -65,6 +65,7 @@ public class Tab_Fragment1 extends Fragment implements ShowVideo_View{
 //        mShowVideoXrecycleView.setLayoutManager(new StaggeredGridLayoutManager(0,StaggeredGridLayoutManager.VERTICAL));
         final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+        layoutManager.setAutoMeasureEnabled(true);
 
         mShowVideoXrecycleView.setLayoutManager(layoutManager);
 //        防止item 交换位置
@@ -133,16 +134,20 @@ public class Tab_Fragment1 extends Fragment implements ShowVideo_View{
         myAdapter.setListenner(new MyAdapter.setOnItemRecyclerViewListenner() {
             @Override
             public void setItemClick(int position) {
-                String videoUrl = data.get(position).getVideoUrl();
-                String cover = data.get(position).getCover();
-                String workDesc = data.get(position).getWorkDesc();
-                Intent intent = new Intent(getActivity(), Video_show_video.class);
-                Log.i("aaaurl",videoUrl);
-                intent.putExtra("cover",cover);
-                intent.putExtra("videourl",videoUrl);
-                intent.putExtra("workDesc",workDesc);
-                startActivity(intent);
-            }
+//                String videoUrl = data.get(position).getVideoUrl();
+//                String cover = data.get(position).getCover();
+//                String workDesc = data.get(position).getWorkDesc();
+                Log.i("position",position+"");
+                int wid = data.get(position).getWid();
+//                if (!workDesc.equals("")) {
+                    Intent intent = new Intent(getActivity(), Video_show_video.class);
+
+                    intent.putExtra("wid",wid);
+
+                    startActivity(intent);
+
+                }
+//            }
         });
 
     }

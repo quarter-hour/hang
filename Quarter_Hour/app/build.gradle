@@ -9,6 +9,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [qqappid: "1106793791"]
+
     }
     buildTypes {
         release {
@@ -20,6 +22,7 @@ android {
         exclude 'META-INF/rxjava.properties'
         // ... and any other excludes go here
     }
+
 }
 
 dependencies {
@@ -108,10 +111,17 @@ dependencies {
 
     //I J K Player 视频播放
     compile 'tv.danmaku.ijk.media:ijkplayer-java:0.6.2'
+    //视频播放
+    compile 'fm.jiecao:jiecaovideoplayer:5.5'
     //Glide
     implementation 'com.squareup.picasso:picasso:2.3.2'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     //视频
     compile 'cn.jzvd:jiaozivideoplayer:6.0.0'
-
+    //分享
+    compile 'com.umeng.sdk:share-core:latest.integration'
+    compile 'com.umeng.sdk:share-qq:latest.integration'
+    compile 'com.umeng.sdk:share-wechat:latest.integration'
+    compile 'com.umeng.sdk:share-sina:latest.integration'
+    compile 'com.umeng.sdk:shareboard-widget:latest.integration'
 }

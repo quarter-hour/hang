@@ -2,6 +2,8 @@ package com.bwie.wangkui.quarter_hour.video.fragment;
 
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +16,8 @@ import android.widget.Toast;
 
 import com.bwie.wangkui.quarter_hour.R;
 import com.bwie.wangkui.quarter_hour.utils.LocationUtils;
+import com.bwie.wangkui.quarter_hour.video.adapter.Vicinty_Adapter;
+import com.bwie.wangkui.quarter_hour.video.bean.ShowVideo_Bean;
 import com.bwie.wangkui.quarter_hour.video.bean.VicinityBean;
 import com.bwie.wangkui.quarter_hour.video.presenter.Vicinty_Presenter;
 import com.bwie.wangkui.quarter_hour.video.view.Vicinty_View;
@@ -36,22 +40,39 @@ public class Tab_Fragment2 extends Fragment implements Vicinty_View {
     XRecyclerView mShowVideoXrecycleView;
     private View view;
     private Unbinder unbinder;
+    Handler handler = new Handler(){
 
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+        }
+    };
+    private Vicinty_Presenter vicinty_presenter;
+    private double latitude,longitude;
+    private List<VicinityBean.DataBean> data;
+    private Vicinty_Adapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.viedeo_tab_fragment1, container, false);
         Location location = LocationUtils.getInstance(getActivity()).showLocation();
+<<<<<<< HEAD
       //  double latitude = location.getLatitude();
       //  double longitude = location.getLongitude();
+=======
+        latitude = location.getLatitude();
+         longitude = location.getLongitude();
+>>>>>>> b3d52b13dd709331c2bb37bd23a2ecb41f9b0966
         if (location != null) {
             String address = "纬度：" + location.getLatitude() + "经度：" + location.getLongitude();
             Log.d("FLY.LocationUtils", address);
             Log.i("aqa", address);
         }
 
-        new Vicinty_Presenter(this).vicintyPresenter(page + "", 1 + "", 1 + "");
+
+        vicinty_presenter = new Vicinty_Presenter(this);
+        vicinty_presenter.vicintyPresenter(page + "", 1 + "", 1 + "");
 
         unbinder = ButterKnife.bind(this, view);
         final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
@@ -76,12 +97,60 @@ public class Tab_Fragment2 extends Fragment implements Vicinty_View {
     }
 
     @Override
-    public void vicinty_videoSuccess(VicinityBean vicinityBean) {
+    public void vicinty_videoSuccess(final VicinityBean vicinityBean) {
 
         Toast.makeText(getActivity(), "" + vicinityBean.getCode() + "", Toast.LENGTH_SHORT).show();
+        if (page==1) {
+            data = vicinityBean.getData();
 
-        List<VicinityBean.DataBean> data = vicinityBean.getData();
+            adapter = new Vicinty_Adapter(data, getActivity());
 
+            mShowVideoXrecycleView.setAdapter(adapter);
+        }
+
+        mShowVideoXrecycleView.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+//                Toast.makeText(getActivity(), "刷新", Toast.LENGTH_SHORT).show();
+                page=1;
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mShowVideoXrecycleView.refreshComplete();
+                    }
+                },2000);
+            }
+
+            @Override
+            public void onLoadMore() {
+//                Toast.makeText(getActivity(), "加载", Toast.LENGTH_SHORT).show();
+                page++;
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("page",page+"");
+//                        showVideo_presenter.showVideo_present( page+"");
+                        vicinty_presenter.vicintyPresenter(page+"",latitude+"",longitude+"");
+//                        List<ShowVideo_Bean.DataBean> data1 = showVideo_bean.getData();
+                        List<VicinityBean.DataBean> data1 = vicinityBean.getData();
+                        data.addAll(data1);
+                        adapter.notifyDataSetChanged();
+                        mShowVideoXrecycleView.loadMoreComplete();
+
+                    }
+                },2000);
+            }
+        });
+
+
+
+
+        adapter.onItemclickListenner(new Vicinty_Adapter.onRecyclerclick() {
+            @Override
+            public void serOnRecyclerclickListenner(int position) {
+                Toast.makeText(getActivity(), "+"+data.get(position).getLatitude(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

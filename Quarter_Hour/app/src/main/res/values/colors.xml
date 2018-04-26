@@ -3,6 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#03A9F4</color>
     <color name="colorAccent">#FF4081</color>
+<<<<<<< HEAD
 
     <color name="white">#ffffff</color><!--白色 -->
     <color name="ivory">#fffff0</color><!--象牙色 -->
@@ -152,4 +153,7 @@
     <color name="black">#000000</color><!--黑色 -->
     <color name="transparent">#0000</color><!-- 透明 -->
     <color name="transparent2">#8000</color><!-- 透明 -->
+=======
+    <color name="black">#918D91</color>
+>>>>>>> b3d52b13dd709331c2bb37bd23a2ecb41f9b0966
 </resources>
