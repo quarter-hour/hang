@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 import com.bwie.wangkui.quarter_hour.R;
 import com.bwie.wangkui.quarter_hour.video.bean.ShowVideo_Bean;
 import com.squareup.picasso.Picasso;
@@ -52,13 +53,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        String icon = list.get(position).getUser().getIcon();
-
+//        String icon = list.get(position).getUser().getIcon();
+        String cover = list.get(position).getCover();
         int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
     //Item的宽度，或图片的宽度
         int width = screenWidth/2;
 
-        Glide.with(context).load(icon).override(width,SIZE_ORIGINAL).into(holder.imageView);
+        if (cover!=null){
+            Glide.with(context).load(cover).override(width,Target.SIZE_ORIGINAL).into(holder.imageView);
+        }
     }
 
     @Override

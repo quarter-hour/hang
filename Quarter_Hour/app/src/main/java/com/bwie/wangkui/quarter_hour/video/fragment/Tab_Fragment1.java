@@ -134,10 +134,13 @@ public class Tab_Fragment1 extends Fragment implements ShowVideo_View{
             @Override
             public void setItemClick(int position) {
                 String videoUrl = data.get(position).getVideoUrl();
-//                data.get(position).getT
+                String cover = data.get(position).getCover();
+                String workDesc = data.get(position).getWorkDesc();
                 Intent intent = new Intent(getActivity(), Video_show_video.class);
                 Log.i("aaaurl",videoUrl);
+                intent.putExtra("cover",cover);
                 intent.putExtra("videourl",videoUrl);
+                intent.putExtra("workDesc",workDesc);
                 startActivity(intent);
             }
         });
