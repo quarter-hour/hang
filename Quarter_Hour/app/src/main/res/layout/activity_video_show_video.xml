@@ -8,8 +8,55 @@
     tools:context="com.bwie.wangkui.quarter_hour.video.view.Video_show_video">
 
 
-    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        >
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/raw_1500019926"
+            android:layout_marginLeft="13dp"
+            android:id="@+id/fanhui_image"
+            />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="13dp"
+            android:id="@+id/xihuang_image"
+            android:src="@mipmap/raw_1499933216"
+            />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/raw_14999332161"
+            android:layout_marginLeft="13dp"
+
+            />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/raw_1499995160"
+            android:layout_marginLeft="13dp"
+
+            />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/raw_1499917357"
+            android:layout_marginLeft="150dp"
+            android:id="@+id/fenxiang_image"
+            />
+    </LinearLayout>
+
+    <cn.jzvd.JZVideoPlayerStandard
+        android:id="@+id/videoplayer"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
 
 
 </LinearLayout>

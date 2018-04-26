@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -24,12 +24,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".video.view.Video_show_video"></activity>
+        <activity android:name=".video.view.Video_show_video"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            ></activity>
         <activity android:name=".user.LoginActivity" />
         <activity android:name=".user.RegActivity" />
         <activity android:name=".user.DisanfangActivity" />
         <activity android:name=".user.ForgetpwdActivity" />
         <activity android:name=".user.ConfirmActivity"></activity>
+
     </application>
 
 </manifest>

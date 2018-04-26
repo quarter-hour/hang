@@ -1,38 +1,118 @@
 package com.bwie.wangkui.quarter_hour.video.view;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.bwie.wangkui.quarter_hour.R;
+import com.bwie.wangkui.quarter_hour.base.BaseActivity;
+import com.bwie.wangkui.quarter_hour.utils.L;
+import com.bwie.wangkui.quarter_hour.video.bean.Details_Bean;
+import com.bwie.wangkui.quarter_hour.video.presenter.Details_Presenter;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.jzvd.JZVideoPlayer;
+import cn.jzvd.JZVideoPlayerStandard;
 
 
-public class Video_show_video extends AppCompatActivity {
+public class Video_show_video extends BaseActivity<Details_Presenter> implements Details_View {
+    @BindView(R.id.videoplayer)
+    JZVideoPlayerStandard mVideoplayer;
+    @BindView(R.id.xihuang_image)
+    ImageView mXihuangImage;
+    boolean falg = true;
+    @BindView(R.id.fenxiang_image)
+    ImageView mFenxiangImage;
+    @BindView(R.id.fanhui_image)
+    ImageView mFanhuiImage;
+    private int wid;
 
-
-//    private IjkVideoView mVideoView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video_show_video);
-        initView();
-        ButterKnife.bind(this);
-
-        Intent intent = getIntent();
-        String videourl = intent.getStringExtra("videourl");
-        Log.i("videourl", videourl);
-//        IjkMediaPlayer.loadLibrariesOnce(null);
-//        IjkMediaPlayer.native_profileBegin("libijkplayer.so");
-//        mVideoView.setVideoURI(Uri.parse("http://vod.cntv.lxdns.com/flash/mp4video61/TMS/2017/08/17/63bf8bcc706a46b58ee5c821edaee661_h264818000nero_aac32-5.mp4"));
-//        mVideoView.start();
-
+    public int getLayout() {
+        return R.layout.activity_video_show_video;
     }
 
-    private void initView() {
-//        mVideoView = (IjkVideoView) findViewById(R.id.video_view);
+    @Override
+    public void initView() {
+        ButterKnife.bind(this);
+        wid = getIntent().getIntExtra("wid", 0);
+        Log.i("wid",wid+"");
+        presenter.details_presenter(wid);
+        //红心
+        mXihuangImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (falg == true) {
+                    mXihuangImage.setImageResource(R.mipmap.raw_1499933215);
+                    falg = false;
+                } else {
+                    mXihuangImage.setImageResource(R.mipmap.raw_1499933216);
+                    falg = true;
+
+                }
+            }
+        });
+        mFanhuiImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public Details_Presenter getPresenter() {
+        return new Details_Presenter(this);
+    }
+
+    @Override
+    public Context getContext() {
+        return Video_show_video.this;
+    }
+
+    @Override
+    public void Details_Fail(String s) {
+
+        Log.e("erro",s);
+    }
+
+    @Override
+    public void Details_Sussessce(Details_Bean details_bean) {
+        String msg = details_bean.getMsg();
+        String videoUrl = details_bean.getData().getVideoUrl();
+        String cover = details_bean.getData().getCover();
+//        Log.i("qas",videoUrl);
+        Details_Bean.DataBean data = details_bean.getData();
+        Object workDesc = details_bean.getData().getWorkDesc();
+        Log.i("aaaq",data.getVideoUrl()+msg);
+        if (workDesc.equals("")){
+        mVideoplayer.setUp(videoUrl
+                , JZVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, "无标题");
+        Glide.with(Video_show_video.this).load(cover).into(mVideoplayer.thumbImageView);
+        }else{
+        mVideoplayer.setUp(videoUrl
+                , JZVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, (String)workDesc);
+        Glide.with(Video_show_video.this).load(cover).into(mVideoplayer.thumbImageView);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (JZVideoPlayer.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JZVideoPlayer.releaseAllVideos();
     }
 }
