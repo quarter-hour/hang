@@ -20,6 +20,7 @@ import com.bwie.wangkui.quarter_hour.R;
 import com.bwie.wangkui.quarter_hour.user.model.bean.Login_Bean;
 import com.bwie.wangkui.quarter_hour.user.presenter.Login_Presenter;
 import com.bwie.wangkui.quarter_hour.user.view.Login_View;
+import com.bwie.wangkui.quarter_hour.utils.SharedPreferancesUtil;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -56,7 +57,10 @@ public class LoginActivity extends AppCompatActivity implements Login_View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         ButterKnife.bind(this);
+        hideActionBar();
+
         login_presenter = new Login_Presenter(this);
         prefs = MyApplication.getSp();
 
@@ -133,12 +137,13 @@ public class LoginActivity extends AppCompatActivity implements Login_View {
     public void OnSuccese(Login_Bean login_bean) {
         Toast.makeText(LoginActivity.this, login_bean.getMsg(), Toast.LENGTH_SHORT).show();
         if("0".equals(login_bean.getCode())){
+//            SharedPreferences.Editor edit = prefs.edit();
+//            edit.putBoolean("isLogin", true);
+//            edit.putString("token", login_bean.getData().getToken());
+//            edit.putString("uid", login_bean.getData().getUid()+"");
+//            edit.commit();
+            SharedPreferancesUtil.getSPInstance(LoginActivity.this,"User").put("token",login_bean.getData().getToken());
             finish();
-            SharedPreferences.Editor edit = prefs.edit();
-            edit.putBoolean("isLogin", true);
-            edit.putString("token", login_bean.getData().getToken());
-            edit.putString("uid", login_bean.getData().getUid()+"");
-            edit.commit();
         }
     }
 

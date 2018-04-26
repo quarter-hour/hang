@@ -1,7 +1,11 @@
 package com.bwie.wangkui.quarter_hour.utils;
 
 import com.bwie.wangkui.quarter_hour.user.model.bean.Login_Bean;
+<<<<<<< HEAD
 import com.bwie.wangkui.quarter_hour.video.bean.Details_Bean;
+=======
+import com.bwie.wangkui.quarter_hour.user.model.bean.Reg_Bean;
+>>>>>>> b4871d6ccc6b49c12bdc73575ada517b245024a6
 import com.bwie.wangkui.quarter_hour.video.bean.ShowVideo_Bean;
 
 import retrofit2.http.GET;
@@ -33,9 +37,15 @@ public interface ApiService {
         //登录
         @GET("user/login")
         Flowable<Login_Bean> getLogin(@Query("mobile") String mobile, @Query("password") String password);
+<<<<<<< HEAD
         //视频详情
         @GET("quarter/getVideoDetail")
         Flowable<Details_Bean> details(@QueryMap HashMap<String,String> map );
+=======
+        //注册   https://www.zhaoapi.cn/quarter/register
+        @GET("quarter/register")
+        Flowable<Reg_Bean> getReg(@Query("mobile") String mobile, @Query("password") String password);
+>>>>>>> b4871d6ccc6b49c12bdc73575ada517b245024a6
 
    /* //广告接口
 // 9f42f2314ab1b5de01d6d7158a8b403eff5f2e55

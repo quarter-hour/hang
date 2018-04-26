@@ -21,17 +21,15 @@ public class Login_Model {
                 .getInstance(API.BASEURL)
                 .getApiService(ApiService.class);
 
-        Flowable flowable = apiService.getLogin(mobile, password);
+        Flowable<Login_Bean> flowable = apiService.getLogin(mobile, password);
         flowable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DefaultSubscriber<Login_Bean>() {
                     @Override
                     public void onNext(Login_Bean login_bean) {
-
                         if (onGetListener!=null){
                             onGetListener.LoginSuccess(login_bean);
                         }
-
                     }
 
                     @Override
@@ -50,7 +48,7 @@ public class Login_Model {
 
     }
     public interface OnGetListener{
-        void LoginFail(String s);
         void LoginSuccess(Login_Bean login_bean);
+        void LoginFail(String s);
     }
 }

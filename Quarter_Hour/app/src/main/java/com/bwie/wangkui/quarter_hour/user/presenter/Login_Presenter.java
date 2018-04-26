@@ -17,16 +17,16 @@ public class Login_Presenter extends BasePresenter<Login_View> {
     public void getLoginPresenter(String mobile, String password, final Login_View login_view){
         new Login_Model().getLoginModel(mobile, password, new Login_Model.OnGetListener() {
             @Override
-            public void LoginFail(String s) {
+            public void LoginSuccess(Login_Bean login_bean) {
                 if (Iview!=null){
-                    Iview.onError(s);
+                    Iview.OnSuccese(login_bean);
                 }
             }
 
             @Override
-            public void LoginSuccess(Login_Bean login_bean) {
+            public void LoginFail(String s) {
                 if (Iview!=null){
-                    Iview.OnSuccese(login_bean);
+                    Iview.onError(s);
                 }
             }
         });
