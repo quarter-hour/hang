@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawerlayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+  >
+  <!--内容区-->
+    <LinearLayout
+        android:id="@+id/main_content"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:background="@color/colorPrimaryDark"
+            >
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/fresco"
+               android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                fresco:fadeDuration="300"
+                fresco:placeholderImage="@mipmap/ic_launcher"
+                fresco:roundAsCircle="true"
+                />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:text="推荐" />
+
+              <ImageView
+                  android:id="@+id/biji"
+                  android:layout_width="40dp"
+                  android:layout_height="40dp"
+                  android:src="@mipmap/biji"
+                  android:layout_marginRight="10dp"
+                  android:layout_marginTop="3dp"
+                  android:layout_alignParentRight="true"
+                  />
+
+        </RelativeLayout>
+        <com.hjm.bottomtabbar.BottomTabBar
+            android:id="@+id/btnbar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            android:layout_gravity="bottom"
+           />
+
+    </LinearLayout>
+
+
+
+
+
+    <!--左侧导航菜单-->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        fresco:menu="@menu/menu"
+
+        />
+
+
+</android.support.v4.widget.DrawerLayout>

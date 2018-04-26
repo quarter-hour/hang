@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            fresco:fadeDuration="300"
+            fresco:placeholderImage="@drawable/touxiang"
+            fresco:roundAsCircle="true"
+            android:layout_margin="10dp"
+            >
+        </com.facebook.drawee.view.SimpleDraweeView>
+         <TextView
+             android:id="@+id/title"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_toRightOf="@+id/img"
+             android:text="天蝎喝牛奶"
+             android:layout_alignTop="@+id/img"
+             android:textColor="#f00"
+             android:textSize="12dp"
+             />
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/img"
+            android:layout_alignLeft="@+id/title"
+            android:layout_marginLeft="10dp"
+            android:textSize="8dp"
+
+            android:text="2017-05-24 14:25"
+            />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+
+        android:text="印度情报部门称：“中国战梵蒂冈梵蒂冈电饭锅电饭锅电饭锅地方的发个梵蒂冈地方争愿望空前高涨，每一个”"
+        />
+    <view
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorAccent"
+        >
+
+    </view>
+
+</LinearLayout>
