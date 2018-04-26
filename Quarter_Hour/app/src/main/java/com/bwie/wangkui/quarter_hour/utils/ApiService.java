@@ -6,6 +6,7 @@ import retrofit2.http.GET;
 
 
 import com.bwie.wangkui.quarter_hour.video.bean.ShowVideo_Bean;
+import com.bwie.wangkui.quarter_hour.video.bean.VicinityBean;
 
 import java.util.HashMap;
 
@@ -21,13 +22,12 @@ import rx.Observable;
  */
 
 public interface ApiService {
-<<<<<<< HEAD
-
-        @GET("quarter/getHotVideos")
-        Flowable<ShowVideo_Bean> show_video(@QueryMap HashMap<String,String> map);
-=======
-    //广告接口
->>>>>>> 9f42f2314ab1b5de01d6d7158a8b403eff5f2e55
+    //热门视频
+    @GET("quarter/getHotVideos")
+    Flowable<ShowVideo_Bean> show_video(@QueryMap HashMap<String,String> map);
+    //附近视频
+    @GET("quarter/getHotVideos")
+    Flowable<VicinityBean> vicinity(@QueryMap HashMap<String,String> map);
     @GET("quarter/getAd")
     Observable<Bean> get();
 
