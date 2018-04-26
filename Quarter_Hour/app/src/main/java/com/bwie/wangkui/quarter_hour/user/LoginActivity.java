@@ -1,16 +1,28 @@
 package com.bwie.wangkui.quarter_hour.user;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bwie.wangkui.quarter_hour.MainActivity;
+import com.bwie.wangkui.quarter_hour.MyApplication;
 import com.bwie.wangkui.quarter_hour.R;
+import com.bwie.wangkui.quarter_hour.user.model.bean.Login_Bean;
+import com.bwie.wangkui.quarter_hour.user.presenter.Login_Presenter;
+import com.bwie.wangkui.quarter_hour.user.view.Login_View;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,7 +32,7 @@ import butterknife.OnClick;
 /**
  * 点击其他登录 跳转到 登录页面
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements Login_View {
 
     @BindView(R.id.back)
     ImageView back;
@@ -30,23 +42,52 @@ public class LoginActivity extends AppCompatActivity {
     EditText login_name;
     @BindView(R.id.login_pwd)
     EditText login_pwd;
-    @BindView(R.id.login)
-    Button login;
+    @BindView(R.id.loginBtn)
+    Button loginBtn;
     @BindView(R.id.forgetpwd)
     TextView forgetpwd;
     @BindView(R.id.Tourist)
     TextView Tourist;
+    private SharedPreferences prefs;
+    private Login_Presenter login_presenter;
+    private Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        login_presenter = new Login_Presenter(this);
+        prefs = MyApplication.getSp();
+
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if(!"".equals(login_name.getText().toString().trim()) && !"".equals(login_pwd.getText().toString().trim())){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            loginBtn.setEnabled(true);
+                            loginBtn.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_or_reg_btn_able));
+                        }
+                    });
+                }else{
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            loginBtn.setEnabled(false);
+                            loginBtn.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_or_reg_btn_enable));
+                        }
+                    });
+                }
+            }
+        }, 0, 100);
 
 
     }
 
-    @OnClick({R.id.back, R.id.reg, R.id.login_name, R.id.login_pwd, R.id.login, R.id.forgetpwd, R.id.Tourist})
+    @OnClick({R.id.back, R.id.reg, R.id.login_name, R.id.login_pwd, R.id.loginBtn, R.id.forgetpwd, R.id.Tourist})
     public void onClick(View v) {
         switch (v.getId()) {
             default:
@@ -59,11 +100,19 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, RegActivity.class));
                 LoginActivity.this.overridePendingTransition(R.anim.start_in, R.anim.start_out);
                 break;
-            case R.id.login_name:
+            /*case R.id.login_name:
                 break;
             case R.id.login_pwd:
-                break;
-            case R.id.login:
+                break;*/
+            case R.id.loginBtn:
+                //获取EdText的值
+                String s = login_name.getText().toString();
+                String s1 = login_pwd.getText().toString();
+                if (s!=null && !"".equals(s) && null!=s1 && !"".equals(s1)){
+                    login_presenter.getLoginPresenter(s, s1, this);
+                }else{
+                    Toast.makeText(LoginActivity.this,"用户名或密码不能为空!",Toast.LENGTH_LONG).show();
+                }
                 break;
             case R.id.forgetpwd:
                 startActivity(new Intent(LoginActivity.this, ForgetpwdActivity.class));
@@ -75,4 +124,66 @@ public class LoginActivity extends AppCompatActivity {
                 break;
         }
     }
+    @Override
+    public Context getContext() {
+        return null;
+    }
+
+    @Override
+    public void OnSuccese(Login_Bean login_bean) {
+        Toast.makeText(LoginActivity.this, login_bean.getMsg(), Toast.LENGTH_SHORT).show();
+        if("0".equals(login_bean.getCode())){
+            finish();
+            SharedPreferences.Editor edit = prefs.edit();
+            edit.putBoolean("isLogin", true);
+            edit.putString("token", login_bean.getData().getToken());
+            edit.putString("uid", login_bean.getData().getUid()+"");
+            edit.commit();
+        }
+    }
+
+    @Override
+    public void onError(String s) {
+        Log.i("---longin---",s.toString());
+    }
+    /**
+     * hide action bar
+     */
+    private void hideActionBar() {
+        // Hide UI
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        overridePendingTransition(R.anim.close_in, R.anim.close_out);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(timer != null){
+            timer.cancel();
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1000 && resultCode == 2000){
+            if(data.getStringExtra("login_name") != null && !"".equals(data.getStringExtra("login_name"))){
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        login_name.setText(data.getStringExtra("login_name"));
+                    }
+                });
+            }
+        }
+    }
+
+
 }
