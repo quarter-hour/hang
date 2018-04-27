@@ -3,21 +3,13 @@
     package="com.bwie.wangkui.quarter_hour">
 
     <uses-permission android:name="android.permission.INTERNET" />
-<<<<<<< HEAD
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-=======
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
->>>>>>> b3d52b13dd709331c2bb37bd23a2ecb41f9b0966
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -33,25 +25,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".video.view.Video_show_video"
+        <activity
+            android:name=".video.view.Video_show_video"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait"
-            >
-
-        </activity>
+            android:screenOrientation="portrait" />
         <activity android:name=".user.LoginActivity" />
         <activity android:name=".user.RegActivity" />
         <activity android:name=".user.DisanfangActivity" />
         <activity android:name=".user.ForgetpwdActivity" />
-<<<<<<< HEAD
         <activity android:name=".user.ConfirmActivity" />
         <activity android:name=".creation.view.Creation" />
-        <activity android:name=".creation.view.Article"></activity>
-=======
-        <activity android:name=".user.ConfirmActivity"></activity>
-
->>>>>>> b3d52b13dd709331c2bb37bd23a2ecb41f9b0966
+        <activity android:name=".creation.view.Article" />
+        <activity android:name=".creation.view.Streaming" />
+        <activity android:name=".video.view.Video_User"></activity>
     </application>
 
 </manifest>

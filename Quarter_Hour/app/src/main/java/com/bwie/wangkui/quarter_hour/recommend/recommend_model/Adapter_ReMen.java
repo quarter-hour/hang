@@ -17,7 +17,6 @@ import com.bwie.wangkui.quarter_hour.utils.GlideCircleTransform;
 
 import java.util.List;
 
-
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
 

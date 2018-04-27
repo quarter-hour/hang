@@ -32,11 +32,6 @@ public class MyApplication extends Application{
         Fresco.initialize(this);
         userinfo = getSharedPreferences("userinfo", MODE_PRIVATE);
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> b3d52b13dd709331c2bb37bd23a2ecb41f9b0966
     }
 
     public static MyApplication getMyApplication(){
