@@ -2,11 +2,10 @@ package com.bwie.wangkui.quarter_hour.creation.view;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.bwie.wangkui.quarter_hour.R;
 import com.bwie.wangkui.quarter_hour.creation.presenter.PushPresenter;
 import com.bwie.wangkui.quarter_hour.utils.L;
@@ -24,9 +24,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.wangyi.imagepicker.ImagePicker;
+import me.wangyi.imagepicker.ui.ImagePickerActivity;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -48,6 +51,7 @@ public class Article extends AppCompatActivity implements PushIview {
     private File file;
     private String path;
     private File file1;
+    private ArrayList<me.wangyi.imagepicker.model.Image> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +88,7 @@ public class Article extends AppCompatActivity implements PushIview {
         //判断文本内容不能为空
         if (!"".equals(string) & null != string) {
             //判断文件是否为空
-            if(null==file1) {
+            if(list.size()<=0) {
                 Toast.makeText(this, "没有选择文件", Toast.LENGTH_SHORT).show();
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("uid", "12575");
@@ -95,16 +99,19 @@ public class Article extends AppCompatActivity implements PushIview {
                 Toast.makeText(this, "选择了图片文件", Toast.LENGTH_SHORT).show();
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("uid", "12575");
-                hashMap.put("content", "罩得住");
+                hashMap.put("content", string);
                 PushPresenter presenter = new PushPresenter(this);
-                //通过file对象创建一个请求
-                RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file1);
-                //通过请求体对象 构建MultipartBody.Part对象
-                //"file" 接口里面参数的名
-                MultipartBody.Part part = MultipartBody.Part.createFormData("file", file1.getName(), requestFile);
                 List<MultipartBody.Part> listParts = new ArrayList<>();
-                listParts.add(part);
-                L.e("--filename========="+file1.getName()+"====="+file1.getPath());
+                //通过file对象创建一个请求
+                for (int i=0;i<list.size();i++){
+                    String path = list.get(i).getPath();
+                    File file = new File(path);
+                    RequestBody requestFile = RequestBody.create(MediaType.parse("application/otcet-stream"),file );
+                    //通过请求体对象 构建MultipartBody.Part对象
+                    //"file" 接口里面参数的名
+                    MultipartBody.Part part = MultipartBody.Part.createFormData("jokeFiles",file.getName(), requestFile);
+                    listParts.add(part);
+                }
                 presenter.guanlian(hashMap,listParts);
             }
         } else {
@@ -118,10 +125,22 @@ public class Article extends AppCompatActivity implements PushIview {
      *
      */
     private void choosePhoto() {
-        Intent intentToPickPic = new Intent(Intent.ACTION_PICK, null);
-        // 如果限制上传到服务器的图片类型时可以直接写如："image/jpeg 、 image/png等的类型" 所有类型则写 "image/*"
-        intentToPickPic.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-        startActivityForResult(intentToPickPic, 0);
+        /**
+         * 第三方图片选择
+         */
+        new ImagePicker()
+                .mode(ImagePicker.MODE_MULTI_SELECT)
+                .imageLoader(new MyImageLoader())
+                .selectLimit(9)//最多选择图片数量
+                .requestCode(0)
+                .start(this);
+        /**
+         * 系统图库
+         */
+//        Intent intentToPickPic = new Intent(Intent.ACTION_PICK, null);
+//        // 如果限制上传到服务器的图片类型时可以直接写如："image/jpeg 、 image/png等的类型" 所有类型则写 "image/*"
+//        intentToPickPic.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+//        startActivityForResult(intentToPickPic, 0);
     }
     /**
      * 图片文件转换
@@ -149,7 +168,9 @@ public class Article extends AppCompatActivity implements PushIview {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0 && resultCode == RESULT_OK) {
-            //得到返回图片的url
+            list = data.getParcelableArrayListExtra(ImagePicker.EXTRA_IMAGE_LIST);
+
+           /* //得到返回图片的url
             Uri data1 = data.getData();
             String[] filePathColumn = {MediaStore.Images.Media.DATA};
             //从系统表中查询指定Uri对应的照片
@@ -158,8 +179,26 @@ public class Article extends AppCompatActivity implements PushIview {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             path = cursor.getString(columnIndex);
             cursor.close();
-            file1 = new File(path);
+            file1 = new File(path);*/
 
         }
     }
+
+
+
+
 }
+     class MyImageLoader implements ImagePicker.ImageLoader {
+        public void displayImage(ImageView imageView, Image image) {
+
+    }
+
+         @Override
+         public void displayImage(ImageView imageView, me.wangyi.imagepicker.model.Image image) {
+             Glide.with(imageView.getContext())
+                     .load(image.getPath())
+                     .dontAnimate()
+                     .placeholder(R.mipmap.ic_launcher)
+                     .into(imageView);
+         }
+     }

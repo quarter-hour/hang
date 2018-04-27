@@ -22,20 +22,17 @@ import com.bwie.wangkui.quarter_hour.creation.view.Creation;
 import com.bwie.wangkui.quarter_hour.jokes.Fragment2;
 import com.bwie.wangkui.quarter_hour.recommend.Fragment1;
 import com.bwie.wangkui.quarter_hour.user.DisanfangActivity;
-<<<<<<< HEAD
-=======
 
->>>>>>> b3d52b13dd709331c2bb37bd23a2ecb41f9b0966
 import com.bwie.wangkui.quarter_hour.video.Fragment3;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.hjm.bottomtabbar.BottomTabBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-<<<<<<< HEAD
-=======
+
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
->>>>>>> b3d52b13dd709331c2bb37bd23a2ecb41f9b0966
+import retrofit2.http.HEAD;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -184,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-<<<<<<< HEAD
+
         /**
          * 右上角笔记 点击到达创作页面
          */
@@ -194,8 +191,7 @@ public class MainActivity extends AppCompatActivity {
                  startActivity(new Intent(MainActivity.this, Creation.class));
             }
         });
-=======
->>>>>>> b3d52b13dd709331c2bb37bd23a2ecb41f9b0966
+
 
     }
 

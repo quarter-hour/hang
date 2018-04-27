@@ -57,13 +57,13 @@ public class Tab_Fragment2 extends Fragment implements Vicinty_View {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.viedeo_tab_fragment1, container, false);
         Location location = LocationUtils.getInstance(getActivity()).showLocation();
-<<<<<<< HEAD
+
       //  double latitude = location.getLatitude();
       //  double longitude = location.getLongitude();
-=======
+
         latitude = location.getLatitude();
          longitude = location.getLongitude();
->>>>>>> b3d52b13dd709331c2bb37bd23a2ecb41f9b0966
+
         if (location != null) {
             String address = "纬度：" + location.getLatitude() + "经度：" + location.getLongitude();
             Log.d("FLY.LocationUtils", address);

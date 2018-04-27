@@ -124,4 +124,8 @@ dependencies {
     compile 'com.umeng.sdk:share-wechat:latest.integration'
     compile 'com.umeng.sdk:share-sina:latest.integration'
     compile 'com.umeng.sdk:shareboard-widget:latest.integration'
+
+    //图片选择
+    compile 'me.wangyi:imagepicker:+'
+
 }
