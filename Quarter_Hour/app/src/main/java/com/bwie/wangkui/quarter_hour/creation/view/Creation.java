@@ -37,6 +37,7 @@ public class Creation extends AppCompatActivity {
                 finish();
                 break;
             case R.id.video://点击视频图标 开始视频录制
+                startActivity(new Intent(this,Video.class));
                 break;
             case R.id.text://点击文本  开始创作
               startActivity(new Intent(this,Article.class));

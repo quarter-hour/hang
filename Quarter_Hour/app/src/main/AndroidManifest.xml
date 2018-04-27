@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-
     package="com.bwie.wangkui.quarter_hour">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -11,26 +10,29 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        tools:replace="android:supportsRtl"
-        android:theme="@style/AppTheme">
+        android:supportsRtl="false"
+        android:theme="@style/AppTheme"
+        tools:replace="android:supportsRtl">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".video.view.Video_show_video"
+        <activity
+            android:name=".video.view.Video_show_video"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity android:name=".user.LoginActivity" />
         <activity android:name=".user.RegActivity" />
@@ -38,12 +40,10 @@
         <activity android:name=".user.ForgetpwdActivity" />
         <activity android:name=".user.ConfirmActivity" />
         <activity android:name=".creation.view.Creation" />
-        <activity android:name=".creation.view.Article"></activity>
+        <activity android:name=".creation.view.Article" />
         <activity android:name="me.wangyi.imagepicker.ui.ImagePickerActivity" />
-        <activity android:name="me.wangyi.imagepicker.ui.ImagePreViewActivity"/>
-
-
-
+        <activity android:name="me.wangyi.imagepicker.ui.ImagePreViewActivity" />
+        <activity android:name=".creation.view.Video"></activity>
     </application>
 
 </manifest>
