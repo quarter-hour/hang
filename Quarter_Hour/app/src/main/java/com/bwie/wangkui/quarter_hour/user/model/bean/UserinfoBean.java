@@ -1,16 +1,15 @@
 package com.bwie.wangkui.quarter_hour.user.model.bean;
 
 /**
- * 登录bean类
- * Created by Administrator on 2018/4/26.
+ * Created by Administrator on 2018/4/27.
  */
 
-public class Login_Bean {
+public class UserinfoBean {
 
     /**
-     * msg : 登录成功
+     * msg : 获取用户信息成功
      * code : 0
-     * data : {"age":null,"appkey":"117b31aa8d74aad1","appsecret":"00A7CFDDF6B7643F321D4404AFE66D83","createtime":"2018-04-26T09:11:30","email":null,"fans":null,"follow":null,"gender":null,"icon":null,"latitude":null,"longitude":null,"mobile":"13017603237","money":null,"nickname":null,"password":"8F669074CAF5513351A2DE5CC22AC04C","praiseNum":null,"token":"D4A6FDA3003AC043A66F528E60FD9836","uid":12659,"userId":null,"username":"13017603237"}
+     * data : {"age":null,"appkey":"117b31aa8d74aad1","appsecret":"00A7CFDDF6B7643F321D4404AFE66D83","createtime":"2018-04-27T08:40:26","email":null,"fans":0,"follow":0,"gender":null,"icon":null,"latitude":null,"longitude":null,"mobile":"13017603237","money":null,"nickname":null,"password":"8F669074CAF5513351A2DE5CC22AC04C","praiseNum":null,"token":"D4A6FDA3003AC043A66F528E60FD9836","uid":12659,"userId":null,"username":"13017603237"}
      */
 
     private String msg;
@@ -46,10 +45,10 @@ public class Login_Bean {
          * age : null
          * appkey : 117b31aa8d74aad1
          * appsecret : 00A7CFDDF6B7643F321D4404AFE66D83
-         * createtime : 2018-04-26T09:11:30
+         * createtime : 2018-04-27T08:40:26
          * email : null
-         * fans : null
-         * follow : null
+         * fans : 0
+         * follow : 0
          * gender : null
          * icon : null
          * latitude : null
@@ -70,8 +69,8 @@ public class Login_Bean {
         private String appsecret;
         private String createtime;
         private Object email;
-        private Object fans;
-        private Object follow;
+        private int fans;
+        private int follow;
         private Object gender;
         private Object icon;
         private Object latitude;
@@ -126,19 +125,19 @@ public class Login_Bean {
             this.email = email;
         }
 
-        public Object getFans() {
+        public int getFans() {
             return fans;
         }
 
-        public void setFans(Object fans) {
+        public void setFans(int fans) {
             this.fans = fans;
         }
 
-        public Object getFollow() {
+        public int getFollow() {
             return follow;
         }
 
-        public void setFollow(Object follow) {
+        public void setFollow(int follow) {
             this.follow = follow;
         }
 

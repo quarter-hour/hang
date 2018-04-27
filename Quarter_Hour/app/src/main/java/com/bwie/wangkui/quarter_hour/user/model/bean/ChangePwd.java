@@ -1,14 +1,13 @@
 package com.bwie.wangkui.quarter_hour.user.model.bean;
 
 /**
- * 注册bean类
- * Created by Administrator on 2018/4/26.
+ * Created by Administrator on 2018/4/27.
  */
 
-public class Reg_Bean {
+public class ChangePwd {
 
     /**
-     * msg : 注册成功
+     * msg : 密码修改成功
      * code : 0
      */
 

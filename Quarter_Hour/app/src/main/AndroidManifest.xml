@@ -9,8 +9,15 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<<<<<<< HEAD
 
+=======
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7b6c9c4365f80ef4a69662dfff8db2dc630a6d6b
+>>>>>>> 38a45d005bae6a58b50eb422df16c8fa71653486
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -27,8 +34,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity
             android:name=".video.view.Video_show_video"
+=======
+<<<<<<< HEAD
+        <activity
+            android:name=".video.view.Video_show_video"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name=".user.view.activity.LoginActivity" />
+        <activity android:name=".user.view.activity.RegActivity" />
+        <activity android:name=".user.view.activity.DisanfangActivity" />
+        <activity android:name=".user.view.activity.ForgetpwdActivity" />
+        <activity android:name=".user.view.activity.ConfirmActivity" />
+        <activity android:name=".user.view.activity.SettingsActivity" />
+        <activity android:name=".user.view.activity.ProductionActivity" />
+        <activity android:name=".user.view.activity.MyProductionActivity" />
+        <activity android:name=".user.view.activity.MessageActivity"/>
+=======
+
+        <activity android:name=".video.view.Video_show_video"
+>>>>>>> 38a45d005bae6a58b50eb422df16c8fa71653486
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".user.LoginActivity" />
@@ -41,7 +68,15 @@
         <activity android:name=".creation.view.Streaming" />
         <activity android:name=".video.view.Video_User" />
         <activity android:name="me.wangyi.imagepicker.ui.ImagePickerActivity" />
+<<<<<<< HEAD
         <activity android:name=".user.Focus"></activity>
+=======
+        <activity android:name="me.wangyi.imagepicker.ui.ImagePreViewActivity"/>
+
+
+
+>>>>>>> 7b6c9c4365f80ef4a69662dfff8db2dc630a6d6b
+>>>>>>> 38a45d005bae6a58b50eb422df16c8fa71653486
     </application>
 
 </manifest>
