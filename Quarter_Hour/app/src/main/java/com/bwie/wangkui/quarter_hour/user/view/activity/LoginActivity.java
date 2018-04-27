@@ -1,12 +1,15 @@
-package com.bwie.wangkui.quarter_hour.user;
+package com.bwie.wangkui.quarter_hour.user.view.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +27,8 @@ import com.bwie.wangkui.quarter_hour.utils.SharedPreferancesUtil;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,6 +57,7 @@ public class LoginActivity extends AppCompatActivity implements Login_View {
     private SharedPreferences prefs;
     private Login_Presenter login_presenter;
     private Timer timer;
+    private TextView xiu,yan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +80,7 @@ public class LoginActivity extends AppCompatActivity implements Login_View {
                         public void run() {
                             loginBtn.setEnabled(true);
                             loginBtn.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_or_reg_btn_able));
+
                         }
                     });
                 }else{
@@ -87,7 +94,6 @@ public class LoginActivity extends AppCompatActivity implements Login_View {
                 }
             }
         }, 0, 100);
-
 
     }
 
@@ -119,14 +125,41 @@ public class LoginActivity extends AppCompatActivity implements Login_View {
                 }
                 break;
             case R.id.forgetpwd:
-                startActivity(new Intent(LoginActivity.this, ForgetpwdActivity.class));
-                LoginActivity.this.overridePendingTransition(R.anim.start_in, R.anim.start_out);
+                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                builder.setSingleChoiceItems(new String[]{"修改密码","短信验证登录"}, -1, new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        switch (arg1) {
+                            case 0:String.valueOf(1);
+                            startActivity(new Intent(LoginActivity.this,ConfirmActivity.class));
+                            break;
+                            case 1:String.valueOf(2);
+                                startActivity(new Intent(LoginActivity.this,ForgetpwdActivity.class));
+                            break;
+                            default: break;
+                        }
+                        arg0.dismiss();
+                    }
+                });
+                builder.setNegativeButton("取消",null);
+                builder.show();
                 break;
             case R.id.Tourist:
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 LoginActivity.this.overridePendingTransition(R.anim.start_in, R.anim.start_out);
                 break;
         }
+    }
+    //验证密码是否正确ֻ
+    public static final boolean isRightPwd(String pwd) {
+        Pattern p = Pattern.compile("^(?![^a-zA-Z]+$)(?!\\D+$)[0-9a-zA-Z]{8,16}$");
+        Matcher m = p.matcher(pwd);
+        return m.matches();
+    }
+    //验证手机号是否正确ֻ
+    public static boolean isMobileNO(String s) {
+        Pattern p = Pattern.compile("^(13[0-9]|14[57]|15[0-35-9]|17[6-8]|18[0-9])[0-9]{8}$");
+        Matcher m = p.matcher(s);
+        return m.matches();
     }
     @Override
     public Context getContext() {
@@ -143,7 +176,7 @@ public class LoginActivity extends AppCompatActivity implements Login_View {
 //            edit.putString("uid", login_bean.getData().getUid()+"");
 //            edit.commit();
             SharedPreferancesUtil.getSPInstance(LoginActivity.this,"User").put("token",login_bean.getData().getToken());
-            finish();
+            startActivity(new Intent(LoginActivity.this,MainActivity.class));
         }
     }
 

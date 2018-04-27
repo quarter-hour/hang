@@ -8,7 +8,6 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -21,22 +20,16 @@ import android.widget.Toast;
 
 import com.bwie.wangkui.quarter_hour.jokes.Fragment2;
 import com.bwie.wangkui.quarter_hour.recommend.Fragment1;
-import com.bwie.wangkui.quarter_hour.user.DisanfangActivity;
-import com.bwie.wangkui.quarter_hour.utils.API;
-import com.bwie.wangkui.quarter_hour.utils.ApiService;
-import com.bwie.wangkui.quarter_hour.utils.Bean;
-import com.bwie.wangkui.quarter_hour.utils.RetrofitUtlis;
+import com.bwie.wangkui.quarter_hour.user.view.activity.DisanfangActivity;
+import com.bwie.wangkui.quarter_hour.user.view.activity.MessageActivity;
+import com.bwie.wangkui.quarter_hour.user.view.activity.MyProductionActivity;
+import com.bwie.wangkui.quarter_hour.user.view.activity.SettingsActivity;
 import com.bwie.wangkui.quarter_hour.video.Fragment3;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.hjm.bottomtabbar.BottomTabBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.Observable;
-import rx.Scheduler;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -58,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private SimpleDraweeView myhead;
     private TextView name;
     private ImageView sex;
+    private boolean b = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +70,30 @@ public class MainActivity extends AppCompatActivity {
         myhead = view.findViewById(R.id.simpleDraweeView);//侧滑菜单头像
         name = view.findViewById(R.id.textView2);//姓名
         sex = view.findViewById(R.id.imageView);//性别图片
-
+        //性别
+        sex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "点击了切换视图按钮", Toast.LENGTH_SHORT).show();
+                if (b == false) {
+                    //点击后想要变成什么要的布局样式就搞一个你的需求
+//                    keyrv.setLayoutManager(new GridLayoutManager(this, 2));
+//                    keyrv.setAdapter(adapter_home_sousuo);
+                    //给布尔值重新赋值
+                    b = true;
+                    //给点击按钮的图片重新赋值
+                    sex.setImageResource(R.mipmap.girl);
+                } else if (b == true) {
+//                    keyrv.setLayoutManager(new LinearLayoutManager(this));
+//                    keyrv.setAdapter(adapter_home_sousuo);
+                    //给布尔值重新赋值
+                    b = false;
+                    //给点击按钮的图片重新赋值
+                    sex.setImageResource(R.mipmap.boy);
+                }
+            }
+        });
+        //头像
         myhead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -167,23 +184,23 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.navigation_item_4:
                         Snackbar.make(drawerlayout,"你点击了消息通知",Snackbar.LENGTH_LONG).show();
+                        startActivity(new Intent(MainActivity.this, MessageActivity.class));
                         break;
                     case R.id.navigation_item_5:
                         Snackbar.make(drawerlayout,"你点击了夜间模式",Snackbar.LENGTH_LONG).show();
                         break;
                     case R.id.navigation_item_6:
                         Snackbar.make(drawerlayout,"你点击了我的作品",Snackbar.LENGTH_LONG).show();
+                        startActivity(new Intent(MainActivity.this, MyProductionActivity.class));
                         break;
                     case R.id.navigation_item_7:
                         Snackbar.make(drawerlayout,"你点击了设置",Snackbar.LENGTH_LONG).show();
+                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                         break;
 
                 }
                 return false;
             }
         });
-
-
     }
-
 }

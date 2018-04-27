@@ -3,11 +3,11 @@
     package="com.bwie.wangkui.quarter_hour">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".MyApplication"
@@ -24,15 +24,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".video.view.Video_show_video"
+        <activity
+            android:name=".video.view.Video_show_video"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".user.LoginActivity" />
-        <activity android:name=".user.RegActivity" />
-        <activity android:name=".user.DisanfangActivity" />
-        <activity android:name=".user.ForgetpwdActivity" />
-        <activity android:name=".user.ConfirmActivity"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".user.view.activity.LoginActivity" />
+        <activity android:name=".user.view.activity.RegActivity" />
+        <activity android:name=".user.view.activity.DisanfangActivity" />
+        <activity android:name=".user.view.activity.ForgetpwdActivity" />
+        <activity android:name=".user.view.activity.ConfirmActivity" />
+        <activity android:name=".user.view.activity.SettingsActivity" />
+        <activity android:name=".user.view.activity.ProductionActivity" />
+        <activity android:name=".user.view.activity.MyProductionActivity" />
+        <activity android:name=".user.view.activity.MessageActivity"/>
     </application>
 
 </manifest>

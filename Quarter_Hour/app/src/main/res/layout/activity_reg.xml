@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.bwie.wangkui.quarter_hour.user.RegActivity">
+    tools:context="com.bwie.wangkui.quarter_hour.user.view.activity.RegActivity">
 
     <LinearLayout
         android:id="@+id/linear1"
