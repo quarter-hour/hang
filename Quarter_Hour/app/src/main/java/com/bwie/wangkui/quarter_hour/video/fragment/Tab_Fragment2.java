@@ -1,5 +1,6 @@
 package com.bwie.wangkui.quarter_hour.video.fragment;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +22,7 @@ import com.bwie.wangkui.quarter_hour.video.bean.ShowVideo_Bean;
 import com.bwie.wangkui.quarter_hour.video.bean.VicinityBean;
 import com.bwie.wangkui.quarter_hour.video.presenter.Vicinty_Presenter;
 import com.bwie.wangkui.quarter_hour.video.view.Vicinty_View;
+import com.bwie.wangkui.quarter_hour.video.view.Video_show_video;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
@@ -57,6 +59,10 @@ public class Tab_Fragment2 extends Fragment implements Vicinty_View {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.viedeo_tab_fragment1, container, false);
         Location location = LocationUtils.getInstance(getActivity()).showLocation();
+      //  double latitude = location.getLatitude();
+      //  double longitude = location.getLongitude();
+        latitude = location.getLatitude();
+         longitude = location.getLongitude();
 
       //  double latitude = location.getLatitude();
       //  double longitude = location.getLongitude();
@@ -98,7 +104,7 @@ public class Tab_Fragment2 extends Fragment implements Vicinty_View {
 
     @Override
     public void vicinty_videoSuccess(final VicinityBean vicinityBean) {
-
+        Log.i("log",vicinityBean.getCode() + "");
         Toast.makeText(getActivity(), "" + vicinityBean.getCode() + "", Toast.LENGTH_SHORT).show();
         if (page==1) {
             data = vicinityBean.getData();
@@ -148,7 +154,11 @@ public class Tab_Fragment2 extends Fragment implements Vicinty_View {
         adapter.onItemclickListenner(new Vicinty_Adapter.onRecyclerclick() {
             @Override
             public void serOnRecyclerclickListenner(int position) {
-                Toast.makeText(getActivity(), "+"+data.get(position).getLatitude(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "+"+data.get(position).getLatitude(), Toast.LENGTH_SHORT).show();
+                int wid = data.get(position - 1).getWid();
+                Intent intent = new Intent(getActivity(), Video_show_video.class);
+                intent.putExtra("wid",wid);
+                startActivity(intent);
             }
         });
     }

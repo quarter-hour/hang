@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.bwie.wangkui.quarter_hour.user.ConfirmActivity">
+    android:background="@mipmap/beijingcehua"
+    tools:context="com.bwie.wangkui.quarter_hour.user.view.activity.ConfirmActivity">
 
     <LinearLayout
         android:id="@+id/linear1"

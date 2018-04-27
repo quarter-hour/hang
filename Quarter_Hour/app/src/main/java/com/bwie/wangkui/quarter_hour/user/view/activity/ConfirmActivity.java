@@ -1,4 +1,4 @@
-package com.bwie.wangkui.quarter_hour.user;
+package com.bwie.wangkui.quarter_hour.user.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

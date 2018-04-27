@@ -12,6 +12,7 @@
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:listDivider">@drawable/drivier</item>
     </style>
     <style name="CustomActionBarTheme"
         parent="AppTheme">

@@ -1,6 +1,7 @@
 package com.bwie.wangkui.quarter_hour.user.model.bean;
 
 /**
+ * 注册bean类
  * Created by Administrator on 2018/4/26.
  */
 
