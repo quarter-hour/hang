@@ -36,7 +36,6 @@ public class MyApplication extends Application{
     }
 
     public static MyApplication getMyApplication(){
-
         return myApplication;
     }
 

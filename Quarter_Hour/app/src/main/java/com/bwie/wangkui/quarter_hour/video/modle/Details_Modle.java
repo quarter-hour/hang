@@ -1,9 +1,11 @@
 package com.bwie.wangkui.quarter_hour.video.modle;
 
+import android.util.Log;
+
 import com.bwie.wangkui.quarter_hour.utils.API;
 import com.bwie.wangkui.quarter_hour.utils.ApiService;
 import com.bwie.wangkui.quarter_hour.utils.RetrofitUtlis;
-import com.bwie.wangkui.quarter_hour.video.bean.ShowVideo_Bean;
+import com.bwie.wangkui.quarter_hour.video.bean.Details_Bean;
 
 import java.util.HashMap;
 
@@ -13,37 +15,37 @@ import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DefaultSubscriber;
 
 /**
- * Created by dell on 2018/4/25.
+ * Created by dell on 2018/4/26.
  */
 
-public class ShowVideo_Model {
+public class Details_Modle {
 
-/*
-*展示视频图片的modle 层
-* */
-    public void showVideo_Modle(String page, final VideoListenner listenner){
+    public void details_modle(int wid, final detailsListenner listenner){
+
         ApiService apiService = RetrofitUtlis.getInstance(API.BASEURL).getApiService(ApiService.class);
         HashMap<String,String> hashMap = new HashMap<>();
-        hashMap.put("token","android");
-        hashMap.put("page",page);
-        Flowable<ShowVideo_Bean> showVideo_beanFlowable = apiService.show_video(hashMap);
-        showVideo_beanFlowable.subscribeOn(Schedulers.io())
+        hashMap.put("wid",wid+"");
+        Flowable<Details_Bean> details = apiService.details(hashMap);
+
+        details.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DefaultSubscriber<ShowVideo_Bean>() {
+                .subscribe(new DefaultSubscriber<Details_Bean>() {
                     @Override
-                    public void onNext(ShowVideo_Bean showVideo_bean) {
+                    public void onNext(Details_Bean details_bean) {
 
                         if (listenner!=null){
-                            listenner.videoSuccess(showVideo_bean);
+                            listenner.detailsSuccess(details_bean);
                         }
 
                     }
 
                     @Override
                     public void onError(Throwable t) {
-                                if (listenner!=null){
-                                    listenner.videoFail(t.getMessage());
-                                }
+
+                        if (listenner!=null){
+                            listenner.detailsFail(t.getMessage());
+                        }
+                        Log.e("t",t.getMessage());
                     }
 
                     @Override
@@ -51,14 +53,17 @@ public class ShowVideo_Model {
 
                     }
                 });
+    }
+
+    public interface detailsListenner{
+
+
+        void detailsFail(String s);
+
+        void detailsSuccess(Details_Bean details_bean);
 
     }
 
 
-    public interface VideoListenner{
 
-        void videoFail(String s);
-
-        void videoSuccess(ShowVideo_Bean showVideo_bean);
-    }
 }

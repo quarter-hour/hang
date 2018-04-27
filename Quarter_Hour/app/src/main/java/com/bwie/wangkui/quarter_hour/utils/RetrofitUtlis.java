@@ -1,6 +1,7 @@
 package com.bwie.wangkui.quarter_hour.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
@@ -53,6 +54,7 @@ public class RetrofitUtlis {
             synchronized (RetrofitUtlis.class) {
                 if (retrofitUtil == null) {
                     retrofitUtil = new RetrofitUtlis();
+
                 }
             }
         }
@@ -95,8 +97,9 @@ public class RetrofitUtlis {
 
         @Override
         public Response intercept(Chain chain) throws IOException {
+            SharedPreferences sp = MyApplication.getSp();
             SharedPreferancesUtil user = SharedPreferancesUtil.getSPInstance(MyApplication.myApplication, "User");
-            String token = (String) user.getSharedPreference("token", null);
+            String token = (String) user.getSharedPreference("token", "4ACD74F29724EF480ABC16698BA4476B");
             Request request = chain.request();
             Request.Builder request_builder = request.newBuilder();
             System.out.println(request.method() + "开始添加公共参数222222222");

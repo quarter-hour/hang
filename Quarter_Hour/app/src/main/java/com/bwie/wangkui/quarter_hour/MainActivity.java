@@ -18,18 +18,31 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bwie.wangkui.quarter_hour.creation.view.Creation;
 import com.bwie.wangkui.quarter_hour.jokes.Fragment2;
 import com.bwie.wangkui.quarter_hour.recommend.Fragment1;
+<<<<<<< HEAD
 import com.bwie.wangkui.quarter_hour.user.view.activity.DisanfangActivity;
 import com.bwie.wangkui.quarter_hour.user.view.activity.MessageActivity;
 import com.bwie.wangkui.quarter_hour.user.view.activity.MyProductionActivity;
 import com.bwie.wangkui.quarter_hour.user.view.activity.SettingsActivity;
+=======
+import com.bwie.wangkui.quarter_hour.user.DisanfangActivity;
+
+>>>>>>> 7b6c9c4365f80ef4a69662dfff8db2dc630a6d6b
 import com.bwie.wangkui.quarter_hour.video.Fragment3;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.hjm.bottomtabbar.BottomTabBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+<<<<<<< HEAD
+=======
+
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
+import retrofit2.http.HEAD;
+
+>>>>>>> 7b6c9c4365f80ef4a69662dfff8db2dc630a6d6b
 
 
 public class MainActivity extends AppCompatActivity {
@@ -46,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
     SimpleDraweeView fresco;//主页面头像
     @BindView(R.id.main_content)
     LinearLayout mainContent;//页面布局
+    @BindView(R.id.biji)
+    ImageView biji;
     private String[] arr = new String[]{"推荐", "段子", "视频", "关注"};//页面顶部标题数据
     private boolean flag = true;//判断侧滑栏是否打开或者关闭
     private SimpleDraweeView myhead;
@@ -120,8 +135,8 @@ public class MainActivity extends AppCompatActivity {
                         title.setText(arr[position]);
                     }
                 })
-               .setDividerHeight(60)
-                .setImgSize(100,100)
+                .setDividerHeight(60)
+                .setImgSize(100, 100)
                 .isShowDivider(false);
         /**
          * 点击头像打开侧滑栏
@@ -150,9 +165,10 @@ public class MainActivity extends AppCompatActivity {
                 //设置右面的布局位置  根据左面菜单的right作为右面布局的left   左面的right+屏幕的宽度（或者right的宽度这里是相等的）为右面布局的right
                 mainContent.layout(navigationView.getRight(), 0, navigationView.getRight() + display.getWidth(), display.getHeight());
             }
+
             @Override
             public void onDrawerOpened(View drawerView) {
-
+                    flag=true;
             }
 
             @Override
@@ -172,35 +188,64 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.navigation_item_1:
-                        Snackbar.make(drawerlayout,"你点击了我的关注",Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(drawerlayout, "你点击了我的关注", Snackbar.LENGTH_LONG).show();
                         break;
                     case R.id.navigation_item_2:
-                        Snackbar.make(drawerlayout,"你点击了我的收藏",Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(drawerlayout, "你点击了我的收藏", Snackbar.LENGTH_LONG).show();
                         break;
                     case R.id.navigation_item_3:
-                        Snackbar.make(drawerlayout,"你点击了搜索好友",Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(drawerlayout, "你点击了搜索好友", Snackbar.LENGTH_LONG).show();
                         break;
                     case R.id.navigation_item_4:
+<<<<<<< HEAD
                         Snackbar.make(drawerlayout,"你点击了消息通知",Snackbar.LENGTH_LONG).show();
                         startActivity(new Intent(MainActivity.this, MessageActivity.class));
+=======
+                        Snackbar.make(drawerlayout, "你点击了消息通知", Snackbar.LENGTH_LONG).show();
+>>>>>>> 7b6c9c4365f80ef4a69662dfff8db2dc630a6d6b
                         break;
                     case R.id.navigation_item_5:
-                        Snackbar.make(drawerlayout,"你点击了夜间模式",Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(drawerlayout, "你点击了夜间模式", Snackbar.LENGTH_LONG).show();
                         break;
                     case R.id.navigation_item_6:
+<<<<<<< HEAD
                         Snackbar.make(drawerlayout,"你点击了我的作品",Snackbar.LENGTH_LONG).show();
                         startActivity(new Intent(MainActivity.this, MyProductionActivity.class));
                         break;
                     case R.id.navigation_item_7:
                         Snackbar.make(drawerlayout,"你点击了设置",Snackbar.LENGTH_LONG).show();
                         startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+=======
+                        Snackbar.make(drawerlayout, "你点击了我的作品", Snackbar.LENGTH_LONG).show();
+                        break;
+                    case R.id.navigation_item_7:
+                        Snackbar.make(drawerlayout, "你点击了设置", Snackbar.LENGTH_LONG).show();
+>>>>>>> 7b6c9c4365f80ef4a69662dfff8db2dc630a6d6b
                         break;
 
                 }
                 return false;
             }
         });
+<<<<<<< HEAD
     }
+=======
+
+        /**
+         * 右上角笔记 点击到达创作页面
+         */
+        biji.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                 startActivity(new Intent(MainActivity.this, Creation.class));
+            }
+        });
+
+
+    }
+
+
+>>>>>>> 7b6c9c4365f80ef4a69662dfff8db2dc630a6d6b
 }
