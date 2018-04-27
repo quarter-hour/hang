@@ -1,21 +1,23 @@
 package com.bwie.wangkui.quarter_hour.creation.model;
 
-import android.util.Log;
+
 
 import com.bwie.wangkui.quarter_hour.utils.API;
 import com.bwie.wangkui.quarter_hour.utils.ApiService;
 import com.bwie.wangkui.quarter_hour.utils.L;
 import com.bwie.wangkui.quarter_hour.utils.RetrofitUtlis;
 
-import java.io.File;
+
 import java.util.HashMap;
 import java.util.List;
 
 import io.reactivex.Flowable;
-import io.reactivex.subscribers.DefaultSubscriber;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.DefaultSubscriber;
 import okhttp3.MultipartBody;
+
+
 
 
 /**
@@ -35,7 +37,7 @@ public class PushModel {
 
     //获取网络请求
         public void getData(HashMap<String,String> map, List<MultipartBody.Part> listParts){
-            ApiService apiService = RetrofitUtlis.getInstance(API.BASEURL).getApiService(ApiService.class);
+           ApiService apiService = RetrofitUtlis.getInstance(API.BASEURL).getApiService(ApiService.class);
             Flowable<PushBean> flowable = apiService.push(map, listParts);
             flowable.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -56,6 +58,7 @@ public class PushModel {
 
                         }
                     });
-        }
 
-}
+
+
+        }}

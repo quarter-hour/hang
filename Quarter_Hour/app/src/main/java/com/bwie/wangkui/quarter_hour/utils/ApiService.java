@@ -1,31 +1,34 @@
 package com.bwie.wangkui.quarter_hour.utils;
 
+import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+
+import com.bwie.wangkui.quarter_hour.user.model.bean.FocusBean;
+import com.bwie.wangkui.quarter_hour.video.bean.ShowVideo_Bean;
+
+import retrofit2.http.GET;
 import com.bwie.wangkui.quarter_hour.creation.model.PushBean;
 import com.bwie.wangkui.quarter_hour.recommend.recommend_model.ReMen_Bean;
 import com.bwie.wangkui.quarter_hour.user.model.bean.Login_Bean;
 import com.bwie.wangkui.quarter_hour.video.bean.Details_Bean;
 import com.bwie.wangkui.quarter_hour.user.model.bean.Reg_Bean;
-import com.bwie.wangkui.quarter_hour.video.bean.ShowVideo_Bean;
 
 import okhttp3.MultipartBody;
-import retrofit2.http.FormUrlEncoded;
 import io.reactivex.Flowable;
-import retrofit2.http.GET;
 
 
-import com.bwie.wangkui.quarter_hour.video.bean.ShowVideo_Bean;
+import com.bwie.wangkui.quarter_hour.video.bean.ThumbsBean;
 import com.bwie.wangkui.quarter_hour.video.bean.User_Video_Bean;
+
+
+
 import com.bwie.wangkui.quarter_hour.video.bean.VicinityBean;
 
 import java.util.HashMap;
 import java.util.List;
 
-import io.reactivex.Flowable;
-import retrofit2.http.GET;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 
 import retrofit2.http.QueryMap;
 
@@ -42,27 +45,22 @@ public interface ApiService {
         @GET("quarter/getAd")
         Observable<Bean> get();
         //发表段子
-
         @Multipart
         @POST("quarter/publishJoke")
         Flowable<PushBean> push(@QueryMap HashMap<String,String> map, @Part List<MultipartBody.Part> listParts);
-
-
         //作品个人中心
         @GET("quarter/getWorkInfo")
         Flowable<User_Video_Bean> user_video(@QueryMap HashMap<String,String> map);
-
-
-
-
-
-        @GET("quarter/getHotVideos")
+    //热门视频
+      @GET("quarter/getHotVideos")
         Flowable<ShowVideo_Bean> show_video(@QueryMap HashMap<String,String> map);
     //广告接口
     //附近视频
-    @GET("quarter/getHotVideos")
-    Flowable<VicinityBean> vicinity(@QueryMap HashMap<String,String> map);
-
+       @GET("quarter/getNearVideos")
+        Flowable<VicinityBean> vicinity(@QueryMap HashMap<String,String> map);
+    //点赞
+        @GET("quarter/praise")
+        Flowable<ThumbsBean> thumbs(@QueryMap HashMap<String,String> map);
         //登录
         @GET("user/login")
         Flowable<Login_Bean> getLogin(@Query("mobile") String mobile, @Query("password") String password);
@@ -73,19 +71,10 @@ public interface ApiService {
         @GET("quarter/register")
         Flowable<Reg_Bean> getReg(@Query("mobile") String mobile, @Query("password") String password);
 
-   /* //广告接口
-<<<<<<< HEAD
-
-=======
-// 9f42f2314ab1b5de01d6d7158a8b403eff5f2e55
->>>>>>> 31bd2277432b15d1e8c69e8f282ef95f4fca5818
->>>>>>> fc00618263e70f6355d836b3c5356c4ddb7388f2
->>>>>>> b3d52b13dd709331c2bb37bd23a2ecb41f9b0966
-    @GET("quarter/getAd")
-    Observable<Bean> get();*/
-
     //获取视频作品列表
     @GET("quarter/getVideos")
     Flowable<ReMen_Bean> getRM(@Query("page") String page);
-
+        //关注用户列表
+    @GET("quarter/getFollowUsers")
+    Flowable<FocusBean> focus(@QueryMap HashMap<String,String> map);
 }

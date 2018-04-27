@@ -142,7 +142,9 @@ public class LoginActivity extends AppCompatActivity implements Login_View {
 //            edit.putString("token", login_bean.getData().getToken());
 //            edit.putString("uid", login_bean.getData().getUid()+"");
 //            edit.commit();
-            SharedPreferancesUtil.getSPInstance(LoginActivity.this,"User").put("token",login_bean.getData().getToken());
+            SharedPreferancesUtil user = SharedPreferancesUtil.getSPInstance(LoginActivity.this, "User");
+            user.put("token",login_bean.getData().getToken());
+            user.put("uid",login_bean.getData().getUid());
             finish();
         }
     }

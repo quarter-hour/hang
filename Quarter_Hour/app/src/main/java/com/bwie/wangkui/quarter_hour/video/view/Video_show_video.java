@@ -7,14 +7,17 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bwie.wangkui.quarter_hour.MyApplication;
 import com.bwie.wangkui.quarter_hour.R;
 import com.bwie.wangkui.quarter_hour.base.BaseActivity;
-import com.bwie.wangkui.quarter_hour.utils.L;
+import com.bwie.wangkui.quarter_hour.utils.SharedPreferancesUtil;
 import com.bwie.wangkui.quarter_hour.video.bean.Details_Bean;
+import com.bwie.wangkui.quarter_hour.video.bean.ThumbsBean;
 import com.bwie.wangkui.quarter_hour.video.presenter.Details_Presenter;
-import com.squareup.picasso.Picasso;
+import com.bwie.wangkui.quarter_hour.video.presenter.ThumbsPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +38,7 @@ public class Video_show_video extends BaseActivity<Details_Presenter> implements
     private int wid;
     private String icon;
     private Intent intent;
+    private int uid;
 
 
     @Override
@@ -49,7 +53,10 @@ public class Video_show_video extends BaseActivity<Details_Presenter> implements
         intent = getIntent();
         wid = intent.getIntExtra("wid",0);
         icon = intent.getStringExtra("icon");
+        SharedPreferancesUtil user = SharedPreferancesUtil.getSPInstance(MyApplication.myApplication, "User");
+        uid = (int) user.getSharedPreference("uid", 0);
         Log.i("wid",wid+"");
+        Log.i("uid", uid +"");
         presenter.details_presenter(wid);
         //红心
         mXihuangImage.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +65,29 @@ public class Video_show_video extends BaseActivity<Details_Presenter> implements
 
                 if (falg == true) {
                     mXihuangImage.setImageResource(R.mipmap.raw_1499933215);
+
+
+                    ThumbsPresenter thumbsPresenter = new ThumbsPresenter(new ThumbsView() {
+                        @Override
+                        public void thumbsFail(String s) {
+
+                            Log.e("erro",s);
+                        }
+
+                        @Override
+                        public void thumbsSuccess(ThumbsBean thumbsBean) {
+
+                            Toast.makeText(Video_show_video.this, ""+thumbsBean.getMsg(), Toast.LENGTH_SHORT).show();
+                            Log.i("msg",thumbsBean.getMsg());
+                        }
+
+                        @Override
+                        public Context getContext() {
+                            return Video_show_video.this;
+                        }
+                    });
+
+                    thumbsPresenter.thumbs_presenter(wid+"", uid +"");
                     falg = false;
                 } else {
                     mXihuangImage.setImageResource(R.mipmap.raw_1499933216);

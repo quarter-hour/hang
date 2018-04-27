@@ -23,6 +23,7 @@ import com.bwie.wangkui.quarter_hour.jokes.Fragment2;
 import com.bwie.wangkui.quarter_hour.recommend.Fragment1;
 import com.bwie.wangkui.quarter_hour.user.DisanfangActivity;
 
+import com.bwie.wangkui.quarter_hour.user.Focus;
 import com.bwie.wangkui.quarter_hour.video.Fragment3;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.hjm.bottomtabbar.BottomTabBar;
@@ -30,6 +31,10 @@ import com.hjm.bottomtabbar.BottomTabBar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.http.HEAD;
+
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
+import retrofit2.http.HEAD;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -153,7 +158,9 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_item_1:
-                        Snackbar.make(drawerlayout, "你点击了我的关注", Snackbar.LENGTH_LONG).show();
+//                        Snackbar.make(drawerlayout, "你点击了我的关注", Snackbar.LENGTH_LONG).show();
+//                        Toast.makeText(MainActivity.this, "adsads", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this, Focus.class));
                         break;
                     case R.id.navigation_item_2:
                         Snackbar.make(drawerlayout, "你点击了我的收藏", Snackbar.LENGTH_LONG).show();
@@ -178,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
         /**
          * 右上角笔记 点击到达创作页面
          */
@@ -187,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
                  startActivity(new Intent(MainActivity.this, Creation.class));
             }
         });
+
 
     }
 

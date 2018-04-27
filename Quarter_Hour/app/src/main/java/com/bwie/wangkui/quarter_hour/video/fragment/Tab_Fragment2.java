@@ -63,6 +63,13 @@ public class Tab_Fragment2 extends Fragment implements Vicinty_View {
       //  double longitude = location.getLongitude();
         latitude = location.getLatitude();
          longitude = location.getLongitude();
+
+      //  double latitude = location.getLatitude();
+      //  double longitude = location.getLongitude();
+
+        latitude = location.getLatitude();
+         longitude = location.getLongitude();
+
         if (location != null) {
             String address = "纬度：" + location.getLatitude() + "经度：" + location.getLongitude();
             Log.d("FLY.LocationUtils", address);
@@ -97,7 +104,7 @@ public class Tab_Fragment2 extends Fragment implements Vicinty_View {
 
     @Override
     public void vicinty_videoSuccess(final VicinityBean vicinityBean) {
-
+        Log.i("log",vicinityBean.getCode() + "");
         Toast.makeText(getActivity(), "" + vicinityBean.getCode() + "", Toast.LENGTH_SHORT).show();
         if (page==1) {
             data = vicinityBean.getData();

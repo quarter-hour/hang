@@ -152,4 +152,7 @@
     <color name="black">#000000</color><!--黑色 -->
     <color name="transparent">#0000</color><!-- 透明 -->
     <color name="transparent2">#8000</color><!-- 透明 -->
+    <color name="image_background">#d5d5d5</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
 </resources>

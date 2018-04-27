@@ -56,14 +56,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
     //Item的宽度，或图片的宽度
         int width = screenWidth/2;
+        Log.i("kuandu",screenWidth+"");
+        Log.i("kuandu2",width+"");
 //        Picasso.with(context).load(cover).into(holder.imageView);
-        if (cover!=null&&!cover.equals("")){
+//        if (cover!=null&&!cover.equals("")){
             Glide.with(context)
                     .load(cover)
                     .override(width,Target.SIZE_ORIGINAL)
                     .placeholder(R.mipmap.raw_1500000208)
                     .into(holder.imageView);
-        }
+//        }
     }
 
     @Override
