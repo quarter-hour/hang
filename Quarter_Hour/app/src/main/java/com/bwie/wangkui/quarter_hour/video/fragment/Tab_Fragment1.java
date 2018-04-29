@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -15,7 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.bwie.wangkui.quarter_hour.MainActivity;
 import com.bwie.wangkui.quarter_hour.R;
+import com.bwie.wangkui.quarter_hour.video.MyDecoration;
 import com.bwie.wangkui.quarter_hour.video.adapter.MyAdapter;
 import com.bwie.wangkui.quarter_hour.video.bean.ShowVideo_Bean;
 import com.bwie.wangkui.quarter_hour.video.presenter.ShowVideo_Presenter;
@@ -64,9 +67,9 @@ public class Tab_Fragment1 extends Fragment implements ShowVideo_View{
         //瀑布流
 //        mShowVideoXrecycleView.setLayoutManager(new StaggeredGridLayoutManager(0,StaggeredGridLayoutManager.VERTICAL));
         final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
-        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
-        layoutManager.setAutoMeasureEnabled(true);
-
+//        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+//        layoutManager.setAutoMeasureEnabled(true);
+//        mShowVideoXrecycleView.addItemDecoration(new MyDecoration(getActivity(),MyDecoration.VERTICAL_LIST));
         mShowVideoXrecycleView.setLayoutManager(layoutManager);
 //        防止item 交换位置
         mShowVideoXrecycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -138,12 +141,14 @@ public class Tab_Fragment1 extends Fragment implements ShowVideo_View{
 //                String cover = data.get(position).getCover();
 //                String workDesc = data.get(position).getWorkDesc();
                 Log.i("position",position+"");
-                int wid = data.get(position).getWid();
+                int wid = data.get(position-1).getWid();
+                String icon = data.get(position - 1).getUser().getIcon();
+
 //                if (!workDesc.equals("")) {
                     Intent intent = new Intent(getActivity(), Video_show_video.class);
 
                     intent.putExtra("wid",wid);
-
+                    intent.putExtra("icon",icon);
                     startActivity(intent);
 
                 }

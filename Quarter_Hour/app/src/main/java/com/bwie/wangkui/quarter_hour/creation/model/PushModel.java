@@ -46,13 +46,13 @@ public class PushModel {
                         public void onNext(PushBean pushBean) {
                             L.e("段子发表modelo网络请求成功");
                             L.e("--"+pushBean.getMsg());
+                            callBackPushData.callBackPushData(pushBean.getMsg());
                         }
 
                         @Override
                         public void onError(Throwable t) {
                             L.e(t.getMessage()+"啥玩意啊");
                         }
-
                         @Override
                         public void onComplete() {
 

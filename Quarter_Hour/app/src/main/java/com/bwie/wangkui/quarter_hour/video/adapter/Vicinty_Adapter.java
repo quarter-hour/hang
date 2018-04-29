@@ -46,12 +46,15 @@ public class Vicinty_Adapter extends RecyclerView.Adapter<Vicinty_Adapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         String icon = list.get(position).getUser().getIcon();
-
+        String cover = list.get(position).getCover();
         int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
         //Item的宽度，或图片的宽度
         int width = screenWidth/2;
 
-        Glide.with(context).load(icon).override(width,SIZE_ORIGINAL).into(holder.imageView);
+        Glide.with(context).load(icon)
+                .override(width,SIZE_ORIGINAL)
+                .placeholder(R.mipmap.raw_1500000208)
+                .into(holder.imageView);
     }
 
     @Override

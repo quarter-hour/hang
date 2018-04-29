@@ -26,12 +26,29 @@ import com.bwie.wangkui.quarter_hour.user.view.activity.MessageActivity;
 import com.bwie.wangkui.quarter_hour.user.view.activity.MyProductionActivity;
 import com.bwie.wangkui.quarter_hour.user.view.activity.SettingsActivity;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+import com.bwie.wangkui.quarter_hour.user.Focus;
+=======
+>>>>>>> 7b6c9c4365f80ef4a69662dfff8db2dc630a6d6b
+>>>>>>> 38a45d005bae6a58b50eb422df16c8fa71653486
+>>>>>>> b0bb9c195471668abe42b74d69e3442e2064a78a
 import com.bwie.wangkui.quarter_hour.video.Fragment3;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.hjm.bottomtabbar.BottomTabBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+import retrofit2.http.HEAD;
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 38a45d005bae6a58b50eb422df16c8fa71653486
+>>>>>>> b0bb9c195471668abe42b74d69e3442e2064a78a
 
 import retrofit2.http.HEAD;
 
@@ -181,7 +198,9 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_item_1:
-                        Snackbar.make(drawerlayout, "你点击了我的关注", Snackbar.LENGTH_LONG).show();
+//                        Snackbar.make(drawerlayout, "你点击了我的关注", Snackbar.LENGTH_LONG).show();
+//                        Toast.makeText(MainActivity.this, "adsads", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this, Focus.class));
                         break;
                     case R.id.navigation_item_2:
                         Snackbar.make(drawerlayout, "你点击了我的收藏", Snackbar.LENGTH_LONG).show();

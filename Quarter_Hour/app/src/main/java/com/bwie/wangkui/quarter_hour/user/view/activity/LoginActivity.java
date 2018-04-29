@@ -176,8 +176,15 @@ public class LoginActivity extends AppCompatActivity implements Login_View {
 //            edit.putString("token", login_bean.getData().getToken());
 //            edit.putString("uid", login_bean.getData().getUid()+"");
 //            edit.commit();
+<<<<<<< HEAD:Quarter_Hour/app/src/main/java/com/bwie/wangkui/quarter_hour/user/LoginActivity.java
+            SharedPreferancesUtil user = SharedPreferancesUtil.getSPInstance(LoginActivity.this, "User");
+            user.put("token",login_bean.getData().getToken());
+            user.put("uid",login_bean.getData().getUid());
+            finish();
+=======
             SharedPreferancesUtil.getSPInstance(LoginActivity.this,"User").put("token",login_bean.getData().getToken());
             startActivity(new Intent(LoginActivity.this,MainActivity.class));
+>>>>>>> 38a45d005bae6a58b50eb422df16c8fa71653486:Quarter_Hour/app/src/main/java/com/bwie/wangkui/quarter_hour/user/view/activity/LoginActivity.java
         }
     }
 

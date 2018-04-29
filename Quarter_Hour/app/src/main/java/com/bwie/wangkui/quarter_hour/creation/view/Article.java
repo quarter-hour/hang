@@ -1,12 +1,9 @@
 package com.bwie.wangkui.quarter_hour.creation.view;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.media.Image;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -17,25 +14,22 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bwie.wangkui.quarter_hour.R;
 import com.bwie.wangkui.quarter_hour.creation.presenter.PushPresenter;
-import com.bwie.wangkui.quarter_hour.utils.L;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.wangyi.imagepicker.ImagePicker;
-import me.wangyi.imagepicker.ui.ImagePickerActivity;
+import me.wangyi.imagepicker.model.Image;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 public class Article extends AppCompatActivity implements PushIview {
-
     @BindView(R.id.back)
     TextView back;
     @BindView(R.id.push)
@@ -46,18 +40,28 @@ public class Article extends AppCompatActivity implements PushIview {
     ImageView all;
     @BindView(R.id.at)
     ImageView at;
-    @BindView(R.id.imageView2)
-    ImageView imageView2;
+    @BindView(R.id.a_img1)
+    ImageView aImg1;
+    @BindView(R.id.a_img2)
+    ImageView aImg2;
+    @BindView(R.id.a_img3)
+    ImageView aImg3;
+    @BindView(R.id.a_img4)
+    ImageView aImg4;
     private File file;
     private String path;
     private File file1;
-    private ArrayList<me.wangyi.imagepicker.model.Image> list;
-
+    private ArrayList<Image> list;
+    private List<ImageView> imgs = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
         ButterKnife.bind(this);
+        imgs.add(aImg1);
+        imgs.add(aImg2);
+        imgs.add(aImg3);
+        imgs.add(aImg4);
     }
 
     @OnClick({R.id.back, R.id.push, R.id.all, R.id.at})
@@ -88,14 +92,14 @@ public class Article extends AppCompatActivity implements PushIview {
         //判断文本内容不能为空
         if (!"".equals(string) & null != string) {
             //判断文件是否为空
-            if(list.size()<=0) {
-                Toast.makeText(this, "没有选择文件", Toast.LENGTH_SHORT).show();
-                HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put("uid", "12575");
-                hashMap.put("content", "罩得住");
-                PushPresenter presenter = new PushPresenter(this);
-                presenter.guanlian(hashMap,null);
-            }else{
+            if (list.size() <= 0) {
+                Toast.makeText(this, "请选择上传文件", Toast.LENGTH_SHORT).show();
+//                HashMap<String, String> hashMap = new HashMap<>();
+//                hashMap.put("uid", "12575");
+//                hashMap.put("content", "罩得住");
+//                PushPresenter presenter = new PushPresenter(this);
+//                presenter.guanlian(hashMap, null);
+            } else {
                 Toast.makeText(this, "选择了图片文件", Toast.LENGTH_SHORT).show();
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("uid", "12575");
@@ -103,16 +107,16 @@ public class Article extends AppCompatActivity implements PushIview {
                 PushPresenter presenter = new PushPresenter(this);
                 List<MultipartBody.Part> listParts = new ArrayList<>();
                 //通过file对象创建一个请求
-                for (int i=0;i<list.size();i++){
+                for (int i = 0; i < list.size(); i++) {
                     String path = list.get(i).getPath();
                     File file = new File(path);
-                    RequestBody requestFile = RequestBody.create(MediaType.parse("application/otcet-stream"),file );
+                    RequestBody requestFile = RequestBody.create(MediaType.parse("application/otcet-stream"), file);
                     //通过请求体对象 构建MultipartBody.Part对象
                     //"file" 接口里面参数的名
-                    MultipartBody.Part part = MultipartBody.Part.createFormData("jokeFiles",file.getName(), requestFile);
+                    MultipartBody.Part part = MultipartBody.Part.createFormData("jokeFiles", file.getName(), requestFile);
                     listParts.add(part);
                 }
-                presenter.guanlian(hashMap,listParts);
+                presenter.guanlian(hashMap, listParts);
             }
         } else {
             //提示用户
@@ -122,7 +126,6 @@ public class Article extends AppCompatActivity implements PushIview {
 
     /**
      * 打开相册
-     *
      */
     private void choosePhoto() {
         /**
@@ -131,7 +134,7 @@ public class Article extends AppCompatActivity implements PushIview {
         new ImagePicker()
                 .mode(ImagePicker.MODE_MULTI_SELECT)
                 .imageLoader(new MyImageLoader())
-                .selectLimit(9)//最多选择图片数量
+                .selectLimit(4)//最多选择图片数量
                 .requestCode(0)
                 .start(this);
         /**
@@ -142,6 +145,7 @@ public class Article extends AppCompatActivity implements PushIview {
 //        intentToPickPic.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
 //        startActivityForResult(intentToPickPic, 0);
     }
+
     /**
      * 图片文件转换
      */
@@ -152,7 +156,7 @@ public class Article extends AppCompatActivity implements PushIview {
     //段子发表成功
     @Override
     public void onSuccess(String string) {
-
+        Toast.makeText(this, "" + string, Toast.LENGTH_SHORT).show();
     }
 
     //段子发表失败
@@ -162,14 +166,18 @@ public class Article extends AppCompatActivity implements PushIview {
     }
 
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0 && resultCode == RESULT_OK) {
             list = data.getParcelableArrayListExtra(ImagePicker.EXTRA_IMAGE_LIST);
+            //把图片展示在界面
+             for (int i=0;i<list.size();i++){
+                 Bitmap bitmap = BitmapFactory.decodeFile(list.get(i).getPath());
+                 imgs.get(i).setImageBitmap(bitmap);
+             }
 
+        }
            /* //得到返回图片的url
             Uri data1 = data.getData();
             String[] filePathColumn = {MediaStore.Images.Media.DATA};
@@ -181,24 +189,20 @@ public class Article extends AppCompatActivity implements PushIview {
             cursor.close();
             file1 = new File(path);*/
 
-        }
+
     }
-
-
 
 
 }
-     class MyImageLoader implements ImagePicker.ImageLoader {
-        public void displayImage(ImageView imageView, Image image) {
 
+//图片加载器
+class MyImageLoader implements ImagePicker.ImageLoader {
+    @Override
+    public void displayImage(ImageView imageView, me.wangyi.imagepicker.model.Image image) {
+        Glide.with(imageView.getContext())
+                .load(image.getPath())
+                .dontAnimate()
+                .placeholder(R.mipmap.ic_launcher)
+                .into(imageView);
     }
-
-         @Override
-         public void displayImage(ImageView imageView, me.wangyi.imagepicker.model.Image image) {
-             Glide.with(imageView.getContext())
-                     .load(image.getPath())
-                     .dontAnimate()
-                     .placeholder(R.mipmap.ic_launcher)
-                     .into(imageView);
-         }
-     }
+}
