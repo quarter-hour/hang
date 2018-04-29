@@ -21,29 +21,19 @@ import android.widget.Toast;
 import com.bwie.wangkui.quarter_hour.creation.view.Creation;
 import com.bwie.wangkui.quarter_hour.jokes.Fragment2;
 import com.bwie.wangkui.quarter_hour.recommend.Fragment1;
-<<<<<<< HEAD
 import com.bwie.wangkui.quarter_hour.user.view.activity.DisanfangActivity;
 import com.bwie.wangkui.quarter_hour.user.view.activity.MessageActivity;
 import com.bwie.wangkui.quarter_hour.user.view.activity.MyProductionActivity;
 import com.bwie.wangkui.quarter_hour.user.view.activity.SettingsActivity;
-=======
-import com.bwie.wangkui.quarter_hour.user.DisanfangActivity;
 
->>>>>>> 7b6c9c4365f80ef4a69662dfff8db2dc630a6d6b
 import com.bwie.wangkui.quarter_hour.video.Fragment3;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.hjm.bottomtabbar.BottomTabBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-<<<<<<< HEAD
-=======
 
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import retrofit2.http.HEAD;
-
->>>>>>> 7b6c9c4365f80ef4a69662dfff8db2dc630a6d6b
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -85,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         myhead = view.findViewById(R.id.simpleDraweeView);//侧滑菜单头像
         name = view.findViewById(R.id.textView2);//姓名
         sex = view.findViewById(R.id.imageView);//性别图片
+//        biji = view.findViewById(R.id.biji);//右上角笔记
         //性别
         sex.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,53 +190,32 @@ public class MainActivity extends AppCompatActivity {
                         Snackbar.make(drawerlayout, "你点击了搜索好友", Snackbar.LENGTH_LONG).show();
                         break;
                     case R.id.navigation_item_4:
-<<<<<<< HEAD
                         Snackbar.make(drawerlayout,"你点击了消息通知",Snackbar.LENGTH_LONG).show();
                         startActivity(new Intent(MainActivity.this, MessageActivity.class));
-=======
                         Snackbar.make(drawerlayout, "你点击了消息通知", Snackbar.LENGTH_LONG).show();
->>>>>>> 7b6c9c4365f80ef4a69662dfff8db2dc630a6d6b
                         break;
                     case R.id.navigation_item_5:
                         Snackbar.make(drawerlayout, "你点击了夜间模式", Snackbar.LENGTH_LONG).show();
                         break;
                     case R.id.navigation_item_6:
-<<<<<<< HEAD
                         Snackbar.make(drawerlayout,"你点击了我的作品",Snackbar.LENGTH_LONG).show();
                         startActivity(new Intent(MainActivity.this, MyProductionActivity.class));
                         break;
                     case R.id.navigation_item_7:
                         Snackbar.make(drawerlayout,"你点击了设置",Snackbar.LENGTH_LONG).show();
                         startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-=======
-                        Snackbar.make(drawerlayout, "你点击了我的作品", Snackbar.LENGTH_LONG).show();
                         break;
-                    case R.id.navigation_item_7:
-                        Snackbar.make(drawerlayout, "你点击了设置", Snackbar.LENGTH_LONG).show();
->>>>>>> 7b6c9c4365f80ef4a69662dfff8db2dc630a6d6b
-                        break;
-
                 }
                 return false;
             }
         });
-<<<<<<< HEAD
-    }
-=======
-
         /**
          * 右上角笔记 点击到达创作页面
          */
-        biji.setOnClickListener(new View.OnClickListener() {
-            @Override
+        /*biji.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                 startActivity(new Intent(MainActivity.this, Creation.class));
+                startActivity(new Intent(MainActivity.this, Creation.class));
             }
-        });
-
-
+        });*/
     }
-
-
->>>>>>> 7b6c9c4365f80ef4a69662dfff8db2dc630a6d6b
 }

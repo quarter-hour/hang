@@ -62,7 +62,7 @@ public class Tab_Fragment2 extends Fragment implements Vicinty_View {
       //  double longitude = location.getLongitude();
 
         latitude = location.getLatitude();
-         longitude = location.getLongitude();
+        longitude = location.getLongitude();
 
         if (location != null) {
             String address = "纬度：" + location.getLatitude() + "经度：" + location.getLongitude();
@@ -148,7 +148,7 @@ public class Tab_Fragment2 extends Fragment implements Vicinty_View {
         adapter.onItemclickListenner(new Vicinty_Adapter.onRecyclerclick() {
             @Override
             public void serOnRecyclerclickListenner(int position) {
-                Toast.makeText(getActivity(), "+"+data.get(position).getLatitude(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "+"+data.get(position).getLatitude(), Toast.LENGTH_SHORT).show();
             }
         });
     }
