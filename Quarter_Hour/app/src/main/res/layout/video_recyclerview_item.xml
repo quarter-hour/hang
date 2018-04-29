@@ -9,6 +9,5 @@
         android:id="@+id/video_image"
         android:padding="8dp"
         />
-    <!--android:scaleType="fitXY"-->
 
 </LinearLayout>

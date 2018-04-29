@@ -17,8 +17,8 @@ public class ReMen_Presenter extends BasePresenter<ReMen_View> {
         super(iview);
     }
 
-    public void relance(String page){
-        new ReMen_Model().getServer(page, new ReMen_Model.CallBackDate() {
+    public void relance(String page,String uid){
+        new ReMen_Model().getServer(page,uid, new ReMen_Model.CallBackDate() {
             @Override
             public void faliure(String s) {
                 if(Iview!=null){

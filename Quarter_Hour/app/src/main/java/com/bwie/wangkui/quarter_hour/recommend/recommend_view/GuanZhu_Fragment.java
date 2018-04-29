@@ -38,9 +38,10 @@ public class GuanZhu_Fragment extends Fragment implements ReMen_View{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recommend_remen, container, false);
-        reMenPresenter=new ReMen_Presenter(this);
-        reMenPresenter.relance(page+"");
         unbinder = ButterKnife.bind(this, view);
+        reMenPresenter=new ReMen_Presenter(this);
+        reMenPresenter.relance(page+"","3252");
+
         return view;
     }
 

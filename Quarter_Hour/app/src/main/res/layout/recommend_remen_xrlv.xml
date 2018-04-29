@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/imageView"
         android:layout_marginStart="14dp"
+        android:textColor="@color/colorAccent"
         android:layout_toEndOf="@+id/imageView"
         android:text="TextView" />
 
@@ -30,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView"
         android:layout_alignStart="@+id/textView"
+        android:textSize="11dp"
         android:text="TextView" />
 
     <TextView
@@ -39,23 +41,44 @@
         android:layout_alignStart="@+id/imageView"
         android:layout_below="@+id/textView2"
         android:layout_marginTop="11dp"
-        android:text="TextView" />
 
-    <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
-        android:id="@+id/videoView"
-        android:layout_width="350dp"
-        android:layout_height="180dp"
+        android:text="TextView" />
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:background="#000"
         android:layout_alignStart="@+id/textView3"
+        android:gravity="center"
         android:layout_below="@+id/textView3"
-        android:layout_marginTop="13dp" ></fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard>
+        android:layout_width="450dp"
+        android:layout_height="200dp">
+        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+            android:id="@+id/videoView"
+            android:layout_width="400dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="13dp">
+
+        </fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard>
+
+       <com.bwie.wangkui.quarter_hour.recommend.recommend_view.Customer2View
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/videoView"
+            android:layout_marginTop="14dp"
+            android:layout_toEndOf="@+id/videoView"
+             />
+
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/videoView"
-        android:layout_below="@+id/videoView"
+        android:layout_alignStart="@+id/rl"
+        android:layout_below="@+id/rl"
         android:layout_marginTop="14dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="骑车上高速：不错" />
 
     <TextView
@@ -67,42 +90,18 @@
         android:layout_marginTop="11dp"
         android:text="骑车上高速：不错" />
     <View
+        android:id="@+id/view1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#44000000" />
 
-    <ImageView
+    <com.bwie.wangkui.quarter_hour.recommend.recommend_view.CustomerView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView3"
-        android:layout_alignEnd="@+id/videoView"
-        app:srcCompat="@mipmap/jia" />
+        android:layout_alignEnd="@+id/rl"
+        />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0"
-        android:layout_above="@+id/textView3"
-        android:layout_alignEnd="@+id/videoView"
-        app:srcCompat="@mipmap/jubao" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0"
-        android:layout_above="@+id/textView3"
-        android:layout_alignEnd="@+id/videoView"
-        app:srcCompat="@mipmap/fuzhi" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0"
-        android:layout_above="@+id/textView3"
-        android:layout_alignEnd="@+id/videoView"
-        app:srcCompat="@mipmap/pingbi" />
 </RelativeLayout>

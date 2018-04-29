@@ -41,11 +41,14 @@ public class Fragment3 extends Fragment {
         View view = View.inflate(getActivity(), R.layout.fragment3, null);
 
         unbinder = ButterKnife.bind(this, view);
+
+        mVideoTablayout.setupWithViewPager(mVideoViewpager);
+        mVideoTablayout.setTabMode(TabLayout.MODE_FIXED);
 //设置标题
         for (int i = 0; i <strings.length ; i++) {
             mVideoTablayout.addTab(mVideoTablayout.newTab().setText(strings[i]));
         }
-        mVideoTablayout.setupWithViewPager(mVideoViewpager);
+
         //ViewPage适配器
         Tab_Fragment1 tab_fragment1 = new Tab_Fragment1();
         Tab_Fragment2 tab_fragment2 = new Tab_Fragment2();

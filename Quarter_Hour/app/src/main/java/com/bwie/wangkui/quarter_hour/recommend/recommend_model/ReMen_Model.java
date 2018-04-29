@@ -19,9 +19,9 @@ import io.reactivex.subscribers.DefaultSubscriber;
 public class ReMen_Model {
 
 
-    public void getServer( String page, final CallBackDate callBackDate){
+    public void getServer( String page,String uid, final CallBackDate callBackDate){
         ApiService apiService = RetrofitUtlis.getInstance(API.BASEURL).getApiService(ApiService.class);
-        Flowable<ReMen_Bean> rm = apiService.getRM( page);
+        Flowable<ReMen_Bean> rm = apiService.getRM( page,uid);
         rm.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DefaultSubscriber<ReMen_Bean>() {

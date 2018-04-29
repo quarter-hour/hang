@@ -20,7 +20,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 /**
  * Created by DELL on 2018/4/25.
@@ -33,7 +32,7 @@ public class ReMen_Fragment extends Fragment implements ReMen_View{
     Unbinder unbinder;
 
     ReMen_Presenter reMenPresenter;
-    private int page=2;
+    private int page=1;
     private List<ReMen_Bean.DataBean> data;
     private Adapter_ReMen adapterReMen;
 
@@ -44,8 +43,13 @@ public class ReMen_Fragment extends Fragment implements ReMen_View{
 
 
         reMenPresenter=new ReMen_Presenter(this);
-        reMenPresenter.relance(page+"");
+        reMenPresenter.relance(page+"","3252");
         unbinder = ButterKnife.bind(this, view);
+
+        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        xrlv.setLayoutManager(layoutManager);
+
         return view;
     }
 
@@ -61,14 +65,32 @@ public class ReMen_Fragment extends Fragment implements ReMen_View{
     }
 
     @Override
-    public void success(ReMen_Bean reMenBean) {
+    public void success(final ReMen_Bean reMenBean) {
         data = reMenBean.getData();
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        xrlv.setLayoutManager(layoutManager);
         adapterReMen=new Adapter_ReMen(getActivity(),data);
 
         xrlv.setAdapter(adapterReMen);
+
+
+        xrlv.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                page=1;
+                xrlv.refreshComplete();
+            }
+
+            @Override
+            public void onLoadMore() {
+                page++;
+                reMenPresenter.relance(page+"","3252");
+                List<ReMen_Bean.DataBean> data1 = reMenBean.getData();
+                data.addAll(data1);
+                adapterReMen=new Adapter_ReMen(getActivity(),data);
+                xrlv.setAdapter(adapterReMen);
+                adapterReMen.notifyDataSetChanged();
+                xrlv.loadMoreComplete();
+            }
+        });
 
     }
 
