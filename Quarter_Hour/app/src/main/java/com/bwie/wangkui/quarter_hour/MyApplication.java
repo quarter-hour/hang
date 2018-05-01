@@ -33,11 +33,9 @@ public class MyApplication extends Application{
         userinfo = getSharedPreferences("userinfo", MODE_PRIVATE);
 
 
-
     }
 
     public static MyApplication getMyApplication(){
-
         return myApplication;
     }
 

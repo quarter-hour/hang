@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import com.bwie.wangkui.quarter_hour.R;
 
-
 /**
  * Created by Earl on 2018/3/26.
  */
@@ -84,11 +83,11 @@ public class CustomerView extends RelativeLayout {
     public void showMenu() {
         //三个平移动画 平移出来
         ObjectAnimator firstAnimator = ObjectAnimator.ofFloat(image_pingbi
-                , "translationX", 0, -130);
+                , "translationX", 0, -60);
         ObjectAnimator secondAnimator = ObjectAnimator.ofFloat(image_copy
-                , "translationX", 0, -260);
+                , "translationX", 0, -130);
         ObjectAnimator thirdAnimator = ObjectAnimator.ofFloat(image_report
-                , "translationX", 0, -390);
+                , "translationX", 0, -200);
 
         //旋转动画
         ObjectAnimator rotation1 = ObjectAnimator.ofFloat(image_jian, "rotation", 0, 360, 0);
@@ -110,11 +109,11 @@ public class CustomerView extends RelativeLayout {
     public void hideMenu() {
         //三个平移回去
         ObjectAnimator firstAnimator = ObjectAnimator.ofFloat(image_pingbi
-                , "translationX", image_report.getTranslationX(),-130, 0);
+                , "translationX", image_report.getTranslationX(),-60, 0);
         ObjectAnimator secondAnimator = ObjectAnimator.ofFloat(image_copy
-                , "translationX", image_copy.getTranslationX(), -260,0);
+                , "translationX", image_copy.getTranslationX(), -130,0);
         ObjectAnimator thirdAnimator = ObjectAnimator.ofFloat(image_report
-                , "translationX", image_pingbi.getTranslationX(),-390, 0);
+                , "translationX", image_pingbi.getTranslationX(),-200, 0);
         ObjectAnimator rotation1 = ObjectAnimator.ofFloat(image_show, "rotation", 0, 360, 0);
         ObjectAnimator rotation2 = ObjectAnimator.ofFloat(image_copy, "rotation", 0, 360, 0);
         ObjectAnimator rotation3 = ObjectAnimator.ofFloat(image_pingbi, "rotation", 0, 360, 0);
@@ -124,7 +123,6 @@ public class CustomerView extends RelativeLayout {
         animatorSet.setDuration(1000);
         animatorSet.setInterpolator(new OvershootInterpolator());
         animatorSet.playTogether(rotation1, rotation2, rotation3, rotation4, firstAnimator, secondAnimator, thirdAnimator);
-
         animatorSet.start();
     }
 

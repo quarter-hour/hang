@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.bwie.wangkui.quarter_hour.user.DisanfangActivity">
+    android:background="@mipmap/beijingcehua"
+    tools:context="com.bwie.wangkui.quarter_hour.user.view.activity.DisanfangActivity">
 
     <ImageView
         android:id="@+id/back"
@@ -31,8 +32,9 @@
         android:layout_height="50dp"
         android:layout_above="@+id/qq"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="44dp"
         android:scaleType="fitXY"
+        android:background="@drawable/dsfbiankuang"
         android:src="@mipmap/weixin1" />
 
     <ImageView
@@ -41,18 +43,19 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/weixin"
-        android:layout_marginBottom="98dp"
+        android:layout_marginBottom="134dp"
+        android:background="@drawable/dsfbiankuang"
         android:scaleType="fitXY"
         android:src="@mipmap/qq1" />
 
     <TextView
         android:id="@+id/rests"
-        android:paddingTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/weixin"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp"
+        android:layout_marginBottom="75dp"
+        android:paddingTop="10dp"
         android:text="其他登录方式"
         android:textSize="16dp" />
 

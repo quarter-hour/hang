@@ -2,6 +2,7 @@ package com.bwie.wangkui.quarter_hour.recommend.recommend_model;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +12,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bwie.wangkui.quarter_hour.MyApplication;
 import com.bwie.wangkui.quarter_hour.R;
 import com.bwie.wangkui.quarter_hour.utils.GlideCircleTransform;
 
 import java.util.List;
-
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
@@ -49,6 +50,10 @@ public class Adapter_ReMen extends RecyclerView.Adapter<Adapter_ReMen.MyHolder>{
         holder.tv1.setText(user.getNickname());
         holder.tv2.setText(list.get(position).getCreateTime());
         holder.tv3.setText(list.get(position).getWorkDesc());
+        int wid = list.get(position).getWid();
+        SharedPreferences.Editor edit =MyApplication.getSp().edit();
+        edit.putString("wid", wid + "");
+        edit.commit();
         Glide.with(context)
                 .load(user.getIcon())
                 .diskCacheStrategy(DiskCacheStrategy.NONE)

@@ -44,6 +44,8 @@ public class Fragment3 extends Fragment {
 
         mVideoTablayout.setupWithViewPager(mVideoViewpager);
         mVideoTablayout.setTabMode(TabLayout.MODE_FIXED);
+        mVideoTablayout.setTabMode(TabLayout.MODE_FIXED);
+        mVideoTablayout.setupWithViewPager(mVideoViewpager);
 //设置标题
         for (int i = 0; i <strings.length ; i++) {
             mVideoTablayout.addTab(mVideoTablayout.newTab().setText(strings[i]));

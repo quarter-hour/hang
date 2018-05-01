@@ -1,24 +1,20 @@
 package com.bwie.wangkui.quarter_hour.video.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.telecom.CallScreeningService;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 import com.bwie.wangkui.quarter_hour.R;
 import com.bwie.wangkui.quarter_hour.video.bean.ShowVideo_Bean;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import static com.bumptech.glide.request.target.Target.SIZE_ORIGINAL;
 
 /**
  * Created by dell on 2018/4/25.
@@ -43,6 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
             @Override
             public void onClick(View v) {
                 int layoutPosition = myViewHolder.getLayoutPosition();
+                Log.i("asa",layoutPosition-1+"");
                 listenner.setItemClick(layoutPosition);
             }
         });
@@ -59,10 +56,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
     //Item的宽度，或图片的宽度
         int width = screenWidth/2;
-
-        if (cover!=null&&!cover.equals("")){
-            Glide.with(context).load(cover).override(width,Target.SIZE_ORIGINAL).into(holder.imageView);
-        }
+        Log.i("kuandu",screenWidth+"");
+        Log.i("kuandu2",width+"");
+//        Picasso.with(context).load(cover).into(holder.imageView);
+//        if (cover!=null&&!cover.equals("")){
+            Glide.with(context)
+                    .load(cover)
+                    .override(width,Target.SIZE_ORIGINAL)
+                    .placeholder(R.mipmap.raw_1500000208)
+                    .into(holder.imageView);
+//        }
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.bwie.wangkui.quarter_hour.user;
+package com.bwie.wangkui.quarter_hour.user.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +21,6 @@ import com.bwie.wangkui.quarter_hour.R;
 import com.bwie.wangkui.quarter_hour.user.model.bean.Reg_Bean;
 import com.bwie.wangkui.quarter_hour.user.presenter.Reg_Presenter;
 import com.bwie.wangkui.quarter_hour.user.view.Reg_View;
-import com.bwie.wangkui.quarter_hour.utils.API;
 
 import java.util.Timer;
 import java.util.TimerTask;
