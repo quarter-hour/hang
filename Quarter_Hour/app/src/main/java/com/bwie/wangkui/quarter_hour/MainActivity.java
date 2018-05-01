@@ -1,5 +1,6 @@
 package com.bwie.wangkui.quarter_hour;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -34,11 +36,17 @@ import com.bwie.wangkui.quarter_hour.video.Fragment3;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.hjm.bottomtabbar.BottomTabBar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 
 import butterknife.ButterKnife;
 
 import retrofit2.http.HEAD;
+import me.weyye.hipermission.HiPermission;
+import me.weyye.hipermission.PermissionCallback;
+import me.weyye.hipermission.PermissonItem;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -236,12 +244,57 @@ public class MainActivity extends AppCompatActivity {
          * 右上角笔记 点击到达创作页面
          */
         biji.setOnClickListener(new View.OnClickListener() {
-            @Override
+
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Creation.class));
+
+            }
+        });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<PermissonItem> permissonItems = new ArrayList<PermissonItem>();
+        permissonItems.add(new PermissonItem(Manifest.permission.CAMERA, "照相机", R.drawable.permission_ic_memory));
+        permissonItems.add(new PermissonItem(Manifest.permission.WRITE_EXTERNAL_STORAGE, "文件写入", R.drawable.permission_ic_memory));
+        permissonItems.add(new PermissonItem(Manifest.permission.READ_EXTERNAL_STORAGE, "文件读取", R.drawable.permission_ic_memory));
+        permissonItems.add(new PermissonItem(Manifest.permission.RECORD_AUDIO, "自动", R.drawable.permission_ic_memory));
+        HiPermission.create(this)
+                .permissions(permissonItems)
+                .checkMutiPermission(new PermissionCallback() {
+                    @Override
+                    public void onClose() {
+                        Log.e("权限申请onClose", "用户关闭权限申请");
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        Log.e("权限申请onFinish", "所有权限申请完成");
+
+                    }
+
+                    @Override
+                    public void onDeny(String permisson, int position) {
+                        Log.e("权限申请onClose", "onDeny");
+
+                    }
+
+                    @Override
+                    public void onGuarantee(String permisson, int position) {
+                        Log.e("权限申请onGuarantee", "");
+
+                    }
+                });
+        /**
+         * 右上角笔记 点击到达创作页面
+         */
+        biji.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, Creation.class));
             }
         });
-
     }
 
 }
@@ -250,13 +303,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        /**
-         * 右上角笔记 点击到达创作页面
-         */
-        /*biji.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Creation.class));
-            }
-        });*/
+
+
 //    }
 //}

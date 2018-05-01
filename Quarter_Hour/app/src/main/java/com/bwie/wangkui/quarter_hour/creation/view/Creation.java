@@ -42,6 +42,8 @@ public class Creation extends AppCompatActivity {
 
                 startActivity(new Intent(this,Streaming.class));
 
+                startActivity(new Intent(this,Video.class));
+              //  startActivity(new Intent(this,Streaming.class));
                 break;
             case R.id.text://点击文本  开始创作
               startActivity(new Intent(this,Article.class));

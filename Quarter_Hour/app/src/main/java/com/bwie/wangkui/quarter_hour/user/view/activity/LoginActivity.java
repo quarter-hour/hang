@@ -181,7 +181,6 @@ public class LoginActivity extends AppCompatActivity implements Login_View {
             user.put("token",login_bean.getData().getToken());
             user.put("uid",login_bean.getData().getUid());
             finish();
-
             SharedPreferancesUtil.getSPInstance(LoginActivity.this,"User").put("token",login_bean.getData().getToken());
             startActivity(new Intent(LoginActivity.this,MainActivity.class));
         }

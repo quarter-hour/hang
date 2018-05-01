@@ -53,7 +53,7 @@ public class DisanfangActivity extends AppCompatActivity {
                 break;
             case R.id.rests:
                 startActivity(new Intent(DisanfangActivity.this, LoginActivity.class));
-                DisanfangActivity.this.overridePendingTransition(R.anim.start_in, R.anim.start_out);
+               DisanfangActivity.this.overridePendingTransition(R.anim.start_in, R.anim.start_out);
                 break;
         }
     }

@@ -1,288 +1,108 @@
 package com.bwie.wangkui.quarter_hour.creation.view;
 
-import android.hardware.Camera;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.MediaRecorder;
+
+import android.app.DialogFragment;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.view.View;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+import android.widget.VideoView;
 
-import com.bwie.wangkui.quarter_hour.MainActivity;
 import com.bwie.wangkui.quarter_hour.R;
+import com.bwie.wangkui.quarter_hour.creation.presenter.PushPresenter;
+import com.bwie.wangkui.quarter_hour.creation.presenter.PushVideoPresenter;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-public class Video extends AppCompatActivity implements SurfaceHolder.Callback {
-    private static final String TAG = "MainActivity";
-    private SurfaceView mSurfaceview;
-    private Button mBtnStartStop;
-    private Button mBtnPlay;
-    private boolean mStartedFlg = false;//是否正在录像
-    private boolean mIsPlay = false;//是否正在播放录像
-    private MediaRecorder mRecorder;
-    private SurfaceHolder mSurfaceHolder;
-    private ImageView mImageView;
-    private Camera camera;
-    private MediaPlayer mediaPlayer;
-    private String path;
-    private TextView textView;
-    private int text = 0;
+import butterknife.ButterKnife;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
-    private android.os.Handler handler = new android.os.Handler();
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            text++;
-            textView.setText(text+"");
-            handler.postDelayed(this,1000);
-        }
-    };
+public class Video extends AppCompatActivity implements PushVideoView {
+
+
+    private Uri fromFile;
+    private ProgressDialog dialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_video);
+        ButterKnife.bind(this);
+       //开始录像
+        statrtphoto();
+    }
 
-        mSurfaceview = (SurfaceView) findViewById(R.id.surfaceview);
-        mImageView = (ImageView) findViewById(R.id.imageview);
-        mBtnStartStop = (Button) findViewById(R.id.btnStartStop);
-        mBtnPlay = (Button) findViewById(R.id.btnPlayVideo);
-        textView = (TextView)findViewById(R.id.text);
-        mBtnStartStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mIsPlay) {
-                    if (mediaPlayer != null) {
-                        mIsPlay = false;
-                        mediaPlayer.stop();
-                        mediaPlayer.reset();
-                        mediaPlayer.release();
-                        mediaPlayer = null;
-                    }
-                }
-                if (!mStartedFlg) {
-                    handler.postDelayed(runnable,1000);
-                    mImageView.setVisibility(View.GONE);
-                    if (mRecorder == null) {
-                        mRecorder = new MediaRecorder();
-                    }
+    private void statrtphoto() {
+        //创建输出文件
+        File file = new File(Environment.getExternalStorageDirectory(),"test.mp4");  //存放在sd卡的根目录下
+        fromFile = Uri.fromFile(file);
 
-
-                    if (camera != null) {
-                        camera.setDisplayOrientation(90);
-                        camera.unlock();
-                        mRecorder.setCamera(camera);
-                    }
-
-                    try {
-                        // 这两项需要放在setOutputFormat之前
-                        mRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
-                        mRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-
-                        // Set output file format
-                        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-
-                        // 这两项需要放在setOutputFormat之后
-                        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-                        mRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);
-
-                        mRecorder.setVideoSize(640, 480);
-                        mRecorder.setVideoFrameRate(30);
-                        mRecorder.setVideoEncodingBitRate(3 * 1024 * 1024);
-                        mRecorder.setOrientationHint(90);
-                        //设置记录会话的最大持续时间（毫秒）
-                        mRecorder.setMaxDuration(30 * 1000);
-                        mRecorder.setPreviewDisplay(mSurfaceHolder.getSurface());
-
-                        path = getSDPath();
-                        if (path != null) {
-                            File dir = new File(path + "/recordtest");
-                            if (!dir.exists()) {
-                                dir.mkdir();
-                            }
-                            path = dir + "/" + getDate() + ".mp4";
-                            mRecorder.setOutputFile(path);
-                            mRecorder.prepare();
-                            mRecorder.start();
-                            mStartedFlg = true;
-                            mBtnStartStop.setText("Stop");
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    //stop
-                    if (mStartedFlg) {
-                        try {
-                            handler.removeCallbacks(runnable);
-                            mRecorder.stop();
-                            mRecorder.reset();
-                            mRecorder.release();
-                            mRecorder = null;
-                            mBtnStartStop.setText("Start");
-                            if (camera != null) {
-                                camera.release();
-                                camera = null;
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    mStartedFlg = false;
-                }
-            }
-        });
-
-        mBtnPlay.setOnClickListener(new View.OnClickListener() {
-
-            private SurfaceHolder holder;
-
-            @Override
-            public void onClick(View view) {
-                mIsPlay = true;
-                mImageView.setVisibility(View.GONE);
-                if (mediaPlayer == null) {
-                    mediaPlayer = new MediaPlayer();
-                }
-               // mediaPlayer.reset();
-                Uri uri = Uri.parse(path);
-
-                try {
-                    mediaPlayer.setDataSource(Video.this, uri);
-
-                    holder = mSurfaceview.getHolder();
-                    holder.addCallback(Video.this);
-                    mediaPlayer.prepare();
-                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer mp) {
-
-                            mediaPlayer.start();
-                            mediaPlayer.setLooping(true);
-                        }
-                    });
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//                mediaPlayer = MediaPlayer.create(Video.this, uri);
-//                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-//                mediaPlayer.setDisplay(mSurfaceHolder);
-//                try{
-//                    mediaPlayer.prepare();
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//                mediaPlayer.start();
-            }
-        });
-
-        SurfaceHolder holder = mSurfaceview.getHolder();
-        holder.addCallback(this);
-        // setType必须设置，要不出错.
-        holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        //生成Intent.
+        Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fromFile);
+        //启动摄像头应用程序
+        startActivityForResult(intent, 999);
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (!mStartedFlg) {
-            mImageView.setVisibility(View.VISIBLE);
-        }
-    }
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+       if(data.getData()!=null){
+           HashMap<String, String> hashMap = new HashMap<>();
+           hashMap.put("uid", "12575");
+           hashMap.put("latitude", "2312");
+           hashMap.put("longitude", "213123");
+           PushVideoPresenter presenter = new PushVideoPresenter(this);
+          //视频文件
+           List<MultipartBody.Part> listParts = new ArrayList<>();
+           //通过file对象创建一个请求
+               File file = new File(data.getData().getPath());
+               RequestBody requestFile = RequestBody.create(MediaType.parse("application/otcet-stream"), file);
+               //通过请求体对象 构建MultipartBody.Part对象
+               //"file" 接口里面参数的名
+               MultipartBody.Part part = MultipartBody.Part.createFormData("videoFile", file.getName(), requestFile);
+               listParts.add(part);
 
-    /**
-     * 获取系统时间
-     *
-     * @return
-     */
-    public static String getDate() {
-        Calendar ca = Calendar.getInstance();
-        int year = ca.get(Calendar.YEAR);           // 获取年份
-        int month = ca.get(Calendar.MONTH);         // 获取月份
-        int day = ca.get(Calendar.DATE);            // 获取日
-        int minute = ca.get(Calendar.MINUTE);       // 分
-        int hour = ca.get(Calendar.HOUR);           // 小时
-        int second = ca.get(Calendar.SECOND);       // 秒
+           File file2 = new File("file://qq.jpg");
+           //图片文件
+           File file1 = new File("/storage/emulated/0/Pictures/Screenshots/Screenshot_2018-05-01-13-59-27.png");
+           MultipartBody.Part body1 =MultipartBody.Part.createFormData("coverFile", file2.getName(), requestFile);
+           listParts.add(body1);
+           presenter.guanlian(hashMap,listParts);
+           dialog();
+       }
 
-        String date = "" + year + (month + 1) + day + hour + minute + second;
-        Log.d(TAG, "date:" + date);
+       }
 
-        return date;
-    }
 
-    /**
-     * 获取SD path
-     *
-     * @return
-     */
-    public String getSDPath() {
-        File sdDir = null;
-        boolean sdCardExist = Environment.getExternalStorageState()
-                .equals(android.os.Environment.MEDIA_MOUNTED); // 判断sd卡是否存在
-        if (sdCardExist) {
-            sdDir = Environment.getExternalStorageDirectory();// 获取跟目录
-            return sdDir.toString();
-        }
 
-        return null;
-    }
-
-    @Override
-    public void surfaceCreated(SurfaceHolder surfaceHolder) {
-        mSurfaceHolder = surfaceHolder;
-        camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
-    }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-        // 将holder，这个holder为开始在onCreate里面取得的holder，将它赋给mSurfaceHolder
-        mSurfaceHolder = surfaceHolder;
+    public void dialog(){
+        dialog = new ProgressDialog(this);
+        dialog.setMax(100);
+        dialog.setTitle("视频上传中...");
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.show();
 
     }
 
     @Override
-    public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-        mSurfaceview = null;
-        mSurfaceHolder = null;
-        handler.removeCallbacks(runnable);
-        if (mRecorder != null) {
-            mRecorder.release();
-            mRecorder = null;
-            Log.d(TAG, "surfaceDestroyed release mRecorder");
-        }
-        if (camera != null) {
-            camera.release();
-            camera = null;
-        }
-        if (mediaPlayer != null){
-            mediaPlayer.release();
-            mediaPlayer = null;
-        }
+    public void Onsuccess(String string) {
+          dialog.dismiss();
+        Toast.makeText(this, "上传成功", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }
