@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">一刻钟</string>
+    <string name="imagedescription">image</string>
+    <string name="chat_video_too_short">录制过短，请重试</string>
 </resources>

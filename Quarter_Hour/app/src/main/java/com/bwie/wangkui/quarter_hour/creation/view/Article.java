@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -109,6 +110,7 @@ public class Article extends AppCompatActivity implements PushIview {
                 //通过file对象创建一个请求
                 for (int i = 0; i < list.size(); i++) {
                     String path = list.get(i).getPath();
+                    Log.e("++++++++",path+"");
                     File file = new File(path);
                     RequestBody requestFile = RequestBody.create(MediaType.parse("application/otcet-stream"), file);
                     //通过请求体对象 构建MultipartBody.Part对象

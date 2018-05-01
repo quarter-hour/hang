@@ -155,13 +155,10 @@ public class Tab_Fragment2 extends Fragment implements Vicinty_View {
             @Override
             public void serOnRecyclerclickListenner(int position) {
 //                Toast.makeText(getActivity(), "+"+data.get(position).getLatitude(), Toast.LENGTH_SHORT).show();
-<<<<<<< HEAD
-=======
                 int wid = data.get(position - 1).getWid();
                 Intent intent = new Intent(getActivity(), Video_show_video.class);
                 intent.putExtra("wid",wid);
                 startActivity(intent);
->>>>>>> b0bb9c195471668abe42b74d69e3442e2064a78a
             }
         });
     }
