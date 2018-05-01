@@ -49,7 +49,6 @@ public class DisanfangActivity extends AppCompatActivity {
                 DisanfangActivity.this.overridePendingTransition(R.anim.start_in, R.anim.start_out);
                 break;
             case R.id.qq:
-
                 DisanfangActivity.this.overridePendingTransition(R.anim.start_in, R.anim.start_out);
                 break;
             case R.id.rests:

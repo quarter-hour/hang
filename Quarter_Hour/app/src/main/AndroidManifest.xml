@@ -10,8 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
-
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.CAMERA"/>
 
@@ -33,12 +32,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".video.view.Video_show_video"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait" />
-
+            android:screenOrientation="portrait"/>
         <activity android:name=".user.view.activity.LoginActivity" />
         <activity android:name=".user.view.activity.RegActivity" />
         <activity android:name=".user.view.activity.DisanfangActivity" />
@@ -48,7 +45,6 @@
         <activity android:name=".user.view.activity.ProductionActivity" />
         <activity android:name=".user.view.activity.MyProductionActivity" />
         <activity android:name=".user.view.activity.MessageActivity"/>
-
 
 
         <activity android:name=".creation.view.Creation" />
@@ -61,12 +57,6 @@
 
 
         <activity android:name=".user.Focus"></activity>
-
-
-
-
-
-
     </application>
 
 </manifest>

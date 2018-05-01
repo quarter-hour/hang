@@ -38,10 +38,7 @@ import butterknife.BindView;
 
 import butterknife.ButterKnife;
 
-
-
-
-
+import retrofit2.http.HEAD;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -83,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         myhead = view.findViewById(R.id.simpleDraweeView);//侧滑菜单头像
         name = view.findViewById(R.id.textView2);//姓名
         sex = view.findViewById(R.id.imageView);//性别图片
+//        biji = view.findViewById(R.id.biji);//右上角笔记
         //性别
         sex.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,12 +203,16 @@ public class MainActivity extends AppCompatActivity {
 
                         Snackbar.make(drawerlayout, "你点击了消息通知", Snackbar.LENGTH_LONG).show();
 
+                        Snackbar.make(drawerlayout, "你点击了消息通知", Snackbar.LENGTH_LONG).show();
+                        startActivity(new Intent(MainActivity.this, MessageActivity.class));
+                        Snackbar.make(drawerlayout, "你点击了消息通知", Snackbar.LENGTH_LONG).show();
                         break;
                     case R.id.navigation_item_5:
                         Snackbar.make(drawerlayout, "你点击了夜间模式", Snackbar.LENGTH_LONG).show();
                         break;
                     case R.id.navigation_item_6:
 
+                        Snackbar.make(drawerlayout, "你点击了我的作品", Snackbar.LENGTH_LONG).show();
                         Snackbar.make(drawerlayout, "你点击了我的作品", Snackbar.LENGTH_LONG).show();
                         startActivity(new Intent(MainActivity.this, MyProductionActivity.class));
                         break;
@@ -233,19 +235,28 @@ public class MainActivity extends AppCompatActivity {
         /**
          * 右上角笔记 点击到达创作页面
          */
-        biji.setOnClickListener(new View.OnClickListener(){
+        biji.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View view){
+            public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, Creation.class));
             }
         });
 
     }
 
-
-
-
-
-
-
 }
+
+
+
+
+
+        /**
+         * 右上角笔记 点击到达创作页面
+         */
+        /*biji.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Creation.class));
+            }
+        });*/
+//    }
+//}

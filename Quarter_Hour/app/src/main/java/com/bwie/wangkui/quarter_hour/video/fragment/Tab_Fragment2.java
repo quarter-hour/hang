@@ -68,7 +68,7 @@ public class Tab_Fragment2 extends Fragment implements Vicinty_View {
       //  double longitude = location.getLongitude();
 
         latitude = location.getLatitude();
-         longitude = location.getLongitude();
+        longitude = location.getLongitude();
 
         if (location != null) {
             String address = "纬度：" + location.getLatitude() + "经度：" + location.getLongitude();
@@ -117,7 +117,7 @@ public class Tab_Fragment2 extends Fragment implements Vicinty_View {
         mShowVideoXrecycleView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-//                Toast.makeText(getActivity(), "刷新", Toast.LENGTH_SHORT).show();
+
                 page=1;
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -129,15 +129,13 @@ public class Tab_Fragment2 extends Fragment implements Vicinty_View {
 
             @Override
             public void onLoadMore() {
-//                Toast.makeText(getActivity(), "加载", Toast.LENGTH_SHORT).show();
+
                 page++;
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         Log.i("page",page+"");
-//                        showVideo_presenter.showVideo_present( page+"");
                         vicinty_presenter.vicintyPresenter(page+"",latitude+"",longitude+"");
-//                        List<ShowVideo_Bean.DataBean> data1 = showVideo_bean.getData();
                         List<VicinityBean.DataBean> data1 = vicinityBean.getData();
                         data.addAll(data1);
                         adapter.notifyDataSetChanged();
@@ -154,7 +152,7 @@ public class Tab_Fragment2 extends Fragment implements Vicinty_View {
         adapter.onItemclickListenner(new Vicinty_Adapter.onRecyclerclick() {
             @Override
             public void serOnRecyclerclickListenner(int position) {
-//                Toast.makeText(getActivity(), "+"+data.get(position).getLatitude(), Toast.LENGTH_SHORT).show();
+
                 int wid = data.get(position - 1).getWid();
                 Intent intent = new Intent(getActivity(), Video_show_video.class);
                 intent.putExtra("wid",wid);

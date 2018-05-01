@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -204,7 +205,9 @@ public class LoginActivity extends AppCompatActivity implements Login_View {
     @Override
     protected void onRestart() {
         super.onRestart();
-        overridePendingTransition(R.anim.close_in, R.anim.close_out);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
+            overridePendingTransition(R.anim.close_in, R.anim.close_out);
+        }
     }
 
     @Override

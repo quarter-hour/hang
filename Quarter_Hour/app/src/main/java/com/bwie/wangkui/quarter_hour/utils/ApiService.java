@@ -1,20 +1,23 @@
 package com.bwie.wangkui.quarter_hour.utils;
 
-import com.bwie.wangkui.quarter_hour.jokes.model.bean.DuanZi;
-import com.bwie.wangkui.quarter_hour.recommend.recommend_model.ShouCang;
 import com.bwie.wangkui.quarter_hour.video.bean.ShowVideo_Bean;
 
 import retrofit2.http.GET;
-
-import com.bwie.wangkui.quarter_hour.recommend.recommend_model.ReMen_Bean;
+import com.bwie.wangkui.quarter_hour.jokes.model.bean.DuanZi;
+import com.bwie.wangkui.quarter_hour.recommend.recommend_model.ShouCang;
+import com.bwie.wangkui.quarter_hour.user.model.bean.ForGetPwdBean;
 import com.bwie.wangkui.quarter_hour.user.model.bean.Login_Bean;
-import com.bwie.wangkui.quarter_hour.video.bean.Details_Bean;
 import com.bwie.wangkui.quarter_hour.user.model.bean.Reg_Bean;
-
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 
 import com.bwie.wangkui.quarter_hour.user.model.bean.FocusBean;
-import com.bwie.wangkui.quarter_hour.user.model.bean.ForGetPwdBean;
+
+
+
+import com.bwie.wangkui.quarter_hour.recommend.recommend_model.ReMen_Bean;
+import com.bwie.wangkui.quarter_hour.video.bean.Details_Bean;
+
 
 import com.bwie.wangkui.quarter_hour.creation.model.PushBean;
 
@@ -48,9 +51,6 @@ public interface ApiService {
 
 
 
-        //热门视频
-        @GET("quarter/getHotVideos")
-        Flowable<ShowVideo_Bean> show_video(@QueryMap HashMap<String,String> map);
 
         //广告接口
         @GET("quarter/getAd")
@@ -63,11 +63,19 @@ public interface ApiService {
         @GET("quarter/getWorkInfo")
         Flowable<User_Video_Bean> user_video(@QueryMap HashMap<String,String> map);
 
-    //点赞
+    //热门视频
+      @GET("quarter/getHotVideos")
+        Flowable<ShowVideo_Bean> show_video(@QueryMap HashMap<String,String> map);
+
+        //附近视频
+        @GET("quarter/getHotVideos")
+        Flowable<VicinityBean> vicinity(@QueryMap HashMap<String,String> map);
+
+
+
+         //点赞
         @GET("quarter/praise")
         Flowable<ThumbsBean> thumbs(@QueryMap HashMap<String,String> map);
-    @GET("quarter/getHotVideos")
-    Flowable<VicinityBean> vicinity(@QueryMap HashMap<String,String> map);
 
         //登录
         @GET("user/login")
